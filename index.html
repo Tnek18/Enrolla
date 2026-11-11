@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Enrolla - Complete Student Portal</title>
+    <meta name="theme-color" content="#6366F1">
+    <meta name="description" content="Enrolla student enrollment and academic portal">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <title>Enrolla | Student Portal</title>
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Google Material Symbols -->
@@ -64,11 +69,43 @@
             width: 100%; max-width: 100%; height: 46px; padding: 0 1.2rem; background: #FFFFFF; border: 1px solid #DCDCE4; border-radius: 999px; font-size: 0.95rem; color: #111827;
         }
         .auth-form-side .form-group select {
-            appearance: none; background-image: linear-gradient(45deg, transparent 50%, #9CA3AF 50%), linear-gradient(135deg, #9CA3AF 50%, transparent 50%);
+          appearance: none; cursor: pointer; transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; background-color: #FFFFFF; background-image: linear-gradient(45deg, transparent 50%, #9CA3AF 50%), linear-gradient(135deg, #9CA3AF 50%, transparent 50%);
             background-position: calc(100% - 20px) 20px, calc(100% - 15px) 20px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.2rem;
         }
+        .auth-form-side .form-group select:hover { border-color: #A5B4FC; background-color: #FCFCFF; }
+        .custom-select-native { position: absolute; width: 1px !important; height: 1px !important; opacity: 0; pointer-events: none; }
+        .custom-select { position: relative; width: 100%; }
+        .custom-select-trigger { width: 100%; height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 1.2rem; background: #FFFFFF; border: 1px solid #DCDCE4; border-radius: 999px; color: #111827; font: inherit; font-size: 0.95rem; text-align: left; cursor: pointer; transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; }
+        .custom-select-trigger > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .custom-select-trigger:hover, .custom-select.open .custom-select-trigger { border-color: #A5B4FC; background: #FCFCFF; box-shadow: 0 0 0 4px #EEF0FF; }
+        .custom-select-trigger .material-symbols-outlined { color: #9CA3AF; font-size: 18px; transition: transform 0.2s ease; }
+        .custom-select.open .custom-select-trigger .material-symbols-outlined { transform: rotate(180deg); color: #6C74F2; }
+        .custom-select-menu { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 20; padding: 5px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; }
+        .custom-select.open .custom-select-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .custom-select-option { display: block; width: 100%; padding: 9px 11px; border: 0; border-radius: 9px; background: transparent; color: #334155; font: inherit; font-size: 0.78rem; text-align: left; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; }
+        .custom-select-option:hover, .custom-select-option.selected { background: #EEF2FF; color: #4F46E5; }
         .auth-form-side .form-group input:focus, .auth-form-side .form-group select:focus { border-color: #6C74F2; box-shadow: 0 0 0 4px #EEF0FF; }
-        .auth-form-side .forgot-pass { display: block; float: none; text-align: right; font-size: 0.72rem; font-weight: 600; margin: 0.6rem 0.7rem 0 0; }
+        .auth-validation { display: block; min-height: 16px; margin: 4px 12px 0; font-size: 0.68rem; line-height: 1.35; }
+        .auth-validation.valid { color: #059669; }
+        .auth-validation.invalid { color: #DC2626; }
+        .auth-validation.neutral { color: #64748B; }
+        .password-rules { display: none; flex-wrap: wrap; align-items: flex-start; gap: 3px 12px; margin: 5px 12px 0; padding: 8px 10px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 0.67rem; color: #94A3B8; opacity: 0; transform: translateY(-4px); transition: opacity 0.25s ease, transform 0.25s ease; }
+        .password-rules.visible { display: flex; opacity: 1; transform: translateY(0); }
+        .password-rules.empty { display: none; }
+        .password-rules span { display: block; min-width: 0; max-width: 140px; overflow: hidden; white-space: nowrap; opacity: 1; transform: translateY(0); transition: max-width 0.22s ease, margin-right 0.22s ease, opacity 0.22s ease, transform 0.22s ease; }
+        .password-rules span.passed { max-width: 0; margin-right: -12px; opacity: 0; transform: translateY(-4px); }
+        .password-rules span.hidden { display: none; }
+        .password-rules span.valid { color: #059669; }
+        .password-rules span.invalid { color: #DC2626; }
+        .password-rules span::before { content: '\2713'; display: inline-block; width: 14px; }
+        .password-rules span.invalid::before { content: '\2717'; }
+        .signup-password-status { display: none; }
+        .auth-form-side .form-group input.password-valid { border-color: #10B981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.16); }
+        .auth-form-side .form-group input.password-invalid { border-color: #EF4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.14); }
+        .auth-form-side .form-group input.has-password-status { padding-right: 2.8rem; }
+        .auth-password-label-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 12px; }
+        .auth-password-label-row label { margin: 0 !important; }
+        .auth-form-side .forgot-pass { display: inline-block; font-size: 0.72rem; font-weight: 600; margin: 0; white-space: nowrap; }
         .login-btn {
             width: 100%; height: 46px; border: none; border-radius: 999px; background: #6C74F2; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 1.1rem;
             transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
@@ -83,10 +120,24 @@
         #signup-view .auth-wrap { flex-direction: column; gap: 1.6rem; }
         #signup-view .auth-form-side { width: 560px; }
         #signup-view .enrolla-logo { width: 200px; }
+        .auth-back-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; border: 0; padding: 0; margin-bottom: 1rem; background: transparent; color: #64748B; font: inherit; font-size: 0.75rem; cursor: pointer; }
+        .auth-back-link:hover { color: #4F46E5; }
+        .signup-photo-picker { display: flex; align-items: center; gap: 12px; grid-column: 1 / -1; padding: 10px 12px; border: 1px solid #E2E8F0; border-radius: 14px; background: #F8FAFC; }
+        .signup-photo-preview { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid #C7D2FE; background: #EEF2FF; }
+        .signup-photo-picker input[type="file"] { max-width: 100%; font-size: .72rem; color: #64748B; }
+        .signup-photo-picker small { display: block; margin-top: 3px; color: #94A3B8; font-size: .66rem; }
+        .phone-input-wrap { display: flex; align-items: center; height: 46px; border: 1px solid #DCDCE4; border-radius: 999px; background: #FFF; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+        .phone-input-wrap:focus-within { border-color: #6C74F2; box-shadow: 0 0 0 4px #EEF0FF; }
+        .phone-input-wrap .phone-prefix { padding-left: 1.15rem; color: #64748B; font-size: .88rem; font-weight: 600; }
+        .phone-input-wrap input { border: 0 !important; box-shadow: none !important; height: 44px !important; padding-left: 5px !important; min-width: 0; }
+        .email-confirm-view { display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 2rem; background: #F9F9F9; }
+        .email-confirm-card { width: min(440px, 100%); padding: 2.2rem; border: 1px solid #E2E8F0; border-radius: 24px; background: #FFF; box-shadow: 0 18px 50px rgba(30, 27, 75, .1); text-align: center; }
+        .email-confirm-icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 1rem; border-radius: 50%; background: #EEF2FF; color: #6366F1; }
+        .demo-preview-notice { display: none; position: fixed; top: 14px; left: 50%; z-index: 600; transform: translateX(-50%); padding: 7px 12px; border: 1px solid #FCD34D; border-radius: 999px; background: rgba(255,251,235,.96); color: #92400E; font-size: .72rem; font-weight: 600; box-shadow: 0 5px 16px rgba(146,64,14,.12); }
         .auth-seg { display: grid; grid-template-columns: 1fr 1fr; width: 100%; background: #EFEFF5; border-radius: 999px; padding: 4px; margin-bottom: 1.3rem; }
         .auth-seg button { border: none; background: transparent; height: 38px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: #7B7B88; cursor: pointer; transition: all 0.2s; }
         .auth-seg button.active { background: #FFFFFF; color: #6C74F2; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-        .auth-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 1rem; width: 100%; } .auth-grid .form-group { min-width: 0; }
+        .auth-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 0 1rem; width: 100%; } .auth-grid .form-group { min-width: 0; margin-bottom: 1.1rem; }
         .auth-form-side .form-group select { text-overflow: ellipsis; }
         .auth-grid .span-2 { grid-column: 1 / -1; }
         @media (max-width: 780px) {
@@ -116,6 +167,7 @@
         }
         .brand { display: flex; align-items: center; gap: 10px; font-size: 1.282rem; font-weight: 700; color: #1E1B4B; margin-bottom: 2.5rem; cursor: pointer; user-select: none; }
         .brand .material-symbols-outlined { color: #6366F1; font-size: 2rem; }
+        .portal-brand-logo { width: 154px; height: auto; display: block; }
         .nav-menu { list-style: none; flex: 1; } .nav-menu li { margin-bottom: 0.4rem; }
         .nav-menu a {
             display: flex; align-items: center; gap: 12px; padding: 12px 18px; color: var(--text-muted); text-decoration: none; border-radius: 12px; font-weight: 500; transition: all 0.2s;
@@ -179,7 +231,7 @@
         .card { background: var(--card-bg); border-radius: 20px; padding: 1.5rem; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; } .card-header h3 { font-size: 0.923rem; font-weight: 600; color: #1E293B; }
         .card-header a { font-size: 0.701rem; color: #6366F1; font-weight: 600; text-decoration: none; cursor: pointer; } .card-header a:hover { text-decoration: underline; }
-        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.641rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.641rem; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 4px; text-align: center; line-height: 1.2; }
         .badge-enrolled { background: #D1FAE5; color: #065F46; }
         .badge-available { background: #E0E7FF; color: #3730A3; }
         .badge-core { background: #FEE2E2; color: #991B1B; }
@@ -210,7 +262,7 @@
             display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.1rem; border: 1px solid var(--border-color); border-radius: 14px; margin-bottom: 0.75rem;
             background: #F8FAFC; transition: transform 0.15s, border-color 0.15s; cursor: pointer;
         }
-        .subject-item:hover { transform: translateX(3px); border-color: #C7D2FE; }
+        .subject-item:hover { border-color: #C7D2FE; box-shadow: var(--shadow-sm); }
         .subject-info { display: flex; align-items: center; gap: 14px; }
         .subject-icon { font-size: 22.23px; color: #4F46E5; background: #EEF2FF; padding: 10px; border-radius: 12px; }
         .subject-info h4 { margin: 0; font-size: 0.812rem; font-weight: 600; color: #1E293B; }
@@ -226,18 +278,25 @@
             color: #64748B; font-weight: 500; font-size: 0.752rem;
         }
         .term-info .material-symbols-outlined { margin-right: 8px; vertical-align: middle; font-size: 18px; color: #6366F1; }
-        .quick-actions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.2rem; }
-        .action-btn {
-            display: flex; align-items: center; gap: 14px; padding: 1.1rem; border-radius: 16px; border: none; cursor: pointer; text-align: left; transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .action-btn:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .action-btn .material-symbols-outlined { font-size: 28px; }
-        .action-btn h4 { font-size: 0.769rem; margin: 0; font-weight: 600; }
-        .action-btn p { font-size: 0.616rem; margin: 0; opacity: 0.75; }
-        .btn-blue { background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; }
-        .btn-purple { background: #F3E8FF; color: #9333EA; border: 1px solid #E9D5FF; }
-        .btn-teal { background: #E6FFFA; color: #0D9488; border: 1px solid #CCFBF1; }
-        .btn-yellow { background: #FEF9C3; color: #CA8A04; border: 1px solid #FEF08A; }
+        .quick-actions-card { position: relative; margin-bottom: 1.5rem; }
+        .quick-actions-bar { display: flex; align-items: center; gap: 0.65rem; min-height: 48px; padding: 0.55rem 0.65rem; border: 1px dashed #CBD5E1; border-radius: 12px; background: #F8FAFC; }
+        .quick-actions-list { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; min-width: 0; flex: 1; }
+        .quick-actions-empty { color: #94A3B8; font-size: 0.7rem; }
+        .quick-action-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid #C7D2FE; border-radius: 9px; background: #FFFFFF; color: #4338CA; font: inherit; font-size: 0.69rem; font-weight: 600; cursor: pointer; transition: background-color 0.18s, border-color 0.18s, transform 0.18s; }
+        .quick-action-chip:hover { background: #EEF2FF; border-color: #A5B4FC; transform: translateY(-1px); }
+        .quick-action-chip .material-symbols-outlined { font-size: 17px; }
+        .quick-action-add { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 5px 11px 5px 5px; border: 0; border-radius: 999px; background: transparent; color: #64748B; font: inherit; font-size: 0.69rem; font-weight: 600; cursor: pointer; transition: background-color 0.18s, color 0.18s; }
+        .quick-action-add:hover, .quick-actions-picker.open + .quick-action-add { background: #EEF2FF; color: #4F46E5; }
+        .quick-action-add-icon { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #E0E7FF; color: #4F46E5; }
+        .quick-action-add-icon .material-symbols-outlined { font-size: 19px; }
+        .quick-actions-picker { position: absolute; right: 0.75rem; top: calc(100% - 0.15rem); z-index: 20; width: min(300px, calc(100% - 1.5rem)); padding: 7px; border: 1px solid #E2E8F0; border-radius: 12px; background: #FFFFFF; box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14); opacity: 0; visibility: hidden; transform: translateY(-5px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; }
+        .quick-actions-picker.open { opacity: 1; visibility: visible; transform: translateY(4px); }
+        .quick-actions-picker-title { padding: 5px 7px 7px; color: #64748B; font-size: 0.66rem; font-weight: 600; }
+        .quick-actions-option { display: flex; align-items: center; gap: 9px; width: 100%; padding: 8px; border: 0; border-radius: 8px; background: transparent; color: #334155; font: inherit; text-align: left; cursor: pointer; }
+        .quick-actions-option:hover { background: #F8FAFC; color: #4F46E5; }
+        .quick-actions-option .material-symbols-outlined { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #EEF2FF; color: #6366F1; font-size: 17px; }
+        .quick-actions-option strong { display: block; font-size: 0.69rem; }
+        .quick-actions-option small { display: block; margin-top: 1px; color: #94A3B8; font-size: 0.61rem; }
 
         /* Special requests */
         .admin-table th[onclick]::after { content: " \21C5"; font-size: 0.85em; opacity: 0.55; }
@@ -281,12 +340,7 @@
         #dashboard .term-info .material-symbols-outlined { margin-right: 0; }
         #dashboard .term-info > span:last-child { text-align: right; }
 
-        /* Quick actions: heading now uses .card-header, so the grid needs no extra top margin. */
-        #dashboard .quick-actions-grid { margin-top: 0; }
-        #dashboard .action-btn > div { min-width: 0; }
-        @media (min-width: 769px) and (max-width: 1280px) {
-            #dashboard .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        #dashboard .quick-actions-card .card-header { margin-bottom: 0.65rem; }
         @media (max-width: 1180px) {
             #dashboard .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
         }
@@ -337,22 +391,74 @@
         }
         .filter-pill:hover { border-color: #6366F1; color: #6366F1; }
         .filter-pill.active { background: #6366F1; color: white; border-color: #6366F1; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem; }
+        .catalog-grid { display: flex; flex-direction: column; gap: 0.65rem; }
         .catalog-card {
-            background: white; border: 1px solid var(--border-color); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 0.8rem 1rem; display: grid; grid-template-columns: minmax(0, 1fr) 80px minmax(270px, auto); grid-template-rows: auto auto; align-items: center; gap: 0.65rem 1rem;
+            transition: box-shadow 0.2s, border-color 0.2s; cursor: pointer;
         }
-        .catalog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .cat-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 0.85rem; }
-        .cat-title h3 { font-size: 0.898rem; color: #1E293B; margin-bottom: 0.25rem; }
-        .cat-meta-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.75rem; }
-        .cat-desc { font-size: 0.735rem; color: #475569; margin-bottom: 1.2rem; line-height: 1.55; flex-grow: 1; }
+        .catalog-card:hover { box-shadow: var(--shadow-md); border-color: #C7D2FE; }
+        .catalog-card > div { min-width: 0; }
+        .admin-program-card {
+          background: white; border: 1px solid var(--border-color); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+          transition: transform 0.2s, box-shadow 0.2s; animation: fadeIn 0.35s ease-out forwards;
+        }
+        .admin-program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .admin-program-card .program-code { background: #6366F1; color: white; }
+        .admin-program-card .program-title { color: #1E293B; }
+        .admin-program-card .program-description { color: #475569; }
+        .admin-program-card .program-curriculum { background: #F8FAFC; border: 1px solid #F1F5F9; }
+        .admin-program-card .program-curriculum-label { color: var(--text-muted); }
+        .admin-program-card .program-footer { border-top-color: #F1F5F9; }
+        .admin-program-card .program-action-assign { background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; }
+        .admin-program-card .program-action-assign:hover { background: #4F46E5; color: white; border-color: #4F46E5; }
+        .admin-program-card .program-action-edit { background: #F8FAFC; color: #475569; border: 1px solid #E2E8F0; }
+        .admin-program-card .program-action-edit:hover { background: #E2E8F0; color: #1E293B; border-color: #CBD5E1; }
+        .admin-program-card .program-action-delete { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+        .admin-program-card .program-action-delete:hover { background: #DC2626; color: white; border-color: #DC2626; }
+        .cat-subject { grid-column: 1; grid-row: 1; min-width: 0; }
+        .cat-header { display: block; margin-bottom: 0.35rem; }
+        .cat-title h3 { font-size: 0.88rem; color: #1E293B; margin-bottom: 0; line-height: 1.3; letter-spacing: 0.005em; }
+        .cat-meta-badges { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-top: 5px; }
+        .cat-desc { display: none; }
         .cat-schedule-box {
-            background: #F8FAFC; padding: 8px 12px; border-radius: 10px; font-size: 0.667rem; color: #334155; margin-bottom: 1rem; display: flex; align-items: center; gap: 6px;
-            border: 1px solid #F1F5F9;
+            background: #F8FAFC; padding: 8px 11px; border-radius: 9px; font-size: 0.7rem; line-height: 1.35; color: #334155; display: flex; align-items: center; gap: 7px; border: 1px solid #F1F5F9; min-height: 34px;
         }
-        .cat-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 1rem; gap: 8px; }
-        .cat-units { font-weight: 600; color: #6366F1; background: #EEF2FF; padding: 4px 12px; border-radius: 8px; font-size: 0.684rem; white-space: nowrap; }
+        .cat-footer { grid-column: 3; grid-row: 1; display: flex; justify-content: space-between; align-items: center; gap: 10px; min-width: 0; }
+        .cat-footer > span { font-size: 0.7rem !important; line-height: 1.3; }
+        .cat-footer .cat-action { font-size: 0.68rem !important; padding: 7px 11px !important; }
+        .cat-units { grid-column: 2; grid-row: 1; justify-self: center; min-width: 62px; min-height: 22px; display: inline-flex; align-items: center; justify-content: center; text-align: center; font-weight: 600; color: #6366F1; background: #EEF2FF; padding: 3px 7px; border-radius: 7px; font-size: 0.64rem; line-height: 1.1; white-space: nowrap; }
+        .cat-schedule-box { grid-column: 1 / -1; grid-row: 2; min-width: 0; }
+        .catalog-card .cat-action { cursor: pointer; }
+        .schedule-more-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 22px; width: 22px; height: 22px; margin-left: auto; border: 1px solid #CBD5E1; border-radius: 6px; background: #E2E8F0; color: #64748B; font-size: 16px; font-weight: 600; line-height: 1; cursor: pointer; }
+        .schedule-more-btn:hover, .schedule-more-btn[aria-expanded="true"] { background: #CBD5E1; color: #334155; }
+        .conflict-schedules { display: block; grid-column: 1 / -1; max-height: 0; overflow: hidden; opacity: 0; padding: 0 0.7rem; border-top: 1px dashed transparent; color: #94A3B8; transition: max-height 0.28s ease, opacity 0.2s ease, padding 0.28s ease, border-color 0.28s ease; }
+        .conflict-schedules.open { max-height: 520px; opacity: 1; padding: 0.7rem; border-top-color: #CBD5E1; }
+        .conflict-schedules-head { display: flex; align-items: center; gap: 7px; margin-bottom: 0.55rem; color: #64748B; }
+        .conflict-schedules-title { font-size: 0.68rem; font-weight: 600; }
+        .conflict-schedules-search { width: 100%; padding: 7px 10px 7px 30px; border: 1px solid #E2E8F0; border-radius: 8px; background: #FFFFFF; color: #334155; font: inherit; font-size: 0.65rem; outline: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 10px center; }
+        .conflict-schedules-search:focus { border-color: #C7D2FE; box-shadow: 0 0 0 3px #EEF2FF; }
+        .conflict-schedule-list { display: flex; flex-direction: column; gap: 5px; }
+        .conflict-schedule-row { display: grid; grid-template-columns: 22px minmax(150px, 1fr) minmax(190px, 1.2fr) minmax(150px, 0.9fr); align-items: center; gap: 8px; padding: 0.5rem 0.6rem; border: 1px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; font-size: 0.64rem; color: #94A3B8; }
+        .conflict-schedule-row strong { color: #64748B; }
+        .conflict-schedule-row .conflict-detail { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .conflict-schedule-row .conflict-label { font-size: 0.57rem; color: #A8B3C2; text-transform: uppercase; letter-spacing: 0.04em; }
+        .conflict-empty { padding: 0.5rem; border: 1px dashed #CBD5E1; border-radius: 8px; font-size: 0.64rem; color: #94A3B8; text-align: center; }
+        @media (min-width: 1100px) {
+            .catalog-grid { gap: 0.75rem; }
+            .catalog-card { grid-template-columns: minmax(0, 1fr) 90px minmax(300px, auto); padding: 0.95rem 1.25rem; gap: 0.75rem 1.5rem; }
+            .cat-title h3 { font-size: 0.94rem; }
+            .cat-schedule-box { white-space: nowrap; padding: 9px 12px; }
+            .cat-footer { justify-content: space-between; }
+        }
+        @media (max-width: 760px) {
+           .catalog-card { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto; gap: 0.5rem 0.75rem; }
+           .cat-subject { grid-column: 1; grid-row: 1; }
+           .cat-units { grid-column: 2; grid-row: 1; }
+           .cat-footer { grid-column: 1 / -1; grid-row: 2; justify-content: flex-end; }
+           .cat-schedule-box { grid-column: 1 / -1; grid-row: 3; white-space: normal; }
+           .conflict-schedule-row { grid-template-columns: 22px 1fr; }
+           .conflict-schedule-row .conflict-detail { grid-column: 2; }
+        }
 
         /* SCHEDULE PAGE */
         .schedule-summary-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
@@ -435,11 +541,11 @@
         }
         .edit-toggle-btn:hover { background: #E0E7FF; }
         .info-card { background: white; padding: 1.75rem; border-radius: 18px; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
-        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
-        .info-group { display: flex; flex-direction: column; gap: 0.35rem; }
+        .info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; min-width: 0; }
+        .info-group { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
         .info-group label { font-size: 0.641rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .info-group span { font-size: 0.812rem; color: #1E293B; font-weight: 500; }
-        .info-group input { font-size: 0.787rem; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 8px; outline: none; background: #F8FAFC; }
+        .info-group input { width: 100%; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.787rem; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 8px; outline: none; background: #F8FAFC; }
         .info-group input:focus { border-color: #6366F1; background: white; box-shadow: 0 0 0 3px #EEF2FF; }
         .info-block { display: flex; flex-direction: column; gap: 0.85rem; }
         .info-row { display: flex; gap: 10px; align-items: center; border-bottom: 1px solid #F1F5F9; padding-bottom: 10px; flex-wrap: wrap; }
@@ -484,6 +590,7 @@
             .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
             .profile-layout { flex-direction: column; align-items: center; }
             .info-grid { grid-template-columns: repeat(2, 1fr); }
+          .profile-right { width: 100%; }
         }
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); }
@@ -524,6 +631,7 @@
             transition: transform 0.3s ease; border-right: 1px solid #1E293B;
         }
         .admin-brand { display: flex; align-items: center; gap: 12px; font-size: 1.154rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.35rem; cursor: pointer; }
+        .admin-brand .portal-brand-logo { width: 154px; }
         .admin-brand-sub { font-size: 0.616rem; color: #A5B4FC; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2rem; padding-left: 2px; font-weight: 600; }
         .admin-nav { list-style: none; flex: 1; overflow-y: auto; } .admin-nav li { margin-bottom: 0.3rem; }
         .admin-nav a {
@@ -605,9 +713,10 @@
             justify-content: space-between;
         }
         .capacity-card.full { border-left: 5px solid #EF4444; }
-        .capacity-card.near-full { border-left: 5px solid #F59E0B; }
+        .capacity-card.near-full { border-left: 5px solid #8B5CF6; }
         .capacity-card.available { border-left: 5px solid #10B981; }
         .capacity-card.over-capacity { border: 2px solid #DC2626; background: #FEF2F2; }
+        .capacity-card .pill-near { background: #EDE9FE; color: #6D28D9; }
         .cap-stats-box {
             background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-size: 0.727rem; line-height: 1.65;
             color: var(--navy-900);
@@ -755,14 +864,21 @@
           <h2>Log in your Account</h2>
           <div class="auth-notice" id="login-notice" style="display:none;"></div>
           <form id="login-form" style="width: 100%;" onsubmit="handleLoginSubmit(event)">
-            <div class="form-group"><label for="login-id">Username / ID Number</label> <input type="text" id="login-id" autocomplete="username" required></div>
             <div class="form-group">
-              <label for="login-pass">Password</label>
+              <label for="login-id">Email or Student ID</label>
+              <input type="text" id="login-id" autocomplete="username" placeholder="Enter your email or Student ID" required>
+              <span class="auth-validation neutral">Your Student ID is shown after account creation and on your profile.</span>
+            </div>
+            <div class="form-group">
+              <div class="auth-password-label-row"><label for="login-pass">Password</label><a class="forgot-pass" onclick="openModal('forgot-modal')">Forgot password?</a></div>
               <input type="password" id="login-pass" autocomplete="current-password" required>
-              <a class="forgot-pass" onclick="openModal('forgot-modal')">Forgot password?</a>
             </div>
             <button type="submit" class="login-btn" id="login-submit-btn">Log In</button>
           </form>
+          <div id="demo-account-actions" style="display:none; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button type="button" class="btn-primary-outline" style="flex:1; min-width:130px;" onclick="signInDemoAccount('student')">Try demo student</button>
+            <button type="button" class="btn-primary-outline" style="flex:1; min-width:130px;" onclick="signInDemoAccount('admin')">Try demo admin</button>
+          </div>
           <p class="auth-switch">Don't have an account? <a onclick="showSignup('student')">Create account</a></p>
         </div>
         <div class="auth-logo-side"><svg class="enrolla-logo" viewBox="0 0 340 100" role="img" aria-label="Enrolla"><use href="#enrolla-logo-g" /></svg></div>
@@ -773,6 +889,7 @@
       <div class="auth-wrap">
         <div class="auth-logo-side"><svg class="enrolla-logo" viewBox="0 0 340 100" role="img" aria-label="Enrolla"><use href="#enrolla-logo-g" /></svg></div>
         <div class="auth-form-side">
+          <button type="button" class="auth-back-link" onclick="showLogin()"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>Back to login</button>
           <h2>Create your Account</h2>
           <div class="auth-notice auth-error" id="signup-error" style="display:none;"></div>
           <div class="auth-seg" role="tablist">
@@ -784,15 +901,16 @@
               <div class="form-group"><label for="su-first">First Name</label><input type="text" id="su-first" required></div>
               <div class="form-group"><label for="su-last">Last Name</label><input type="text" id="su-last" required></div>
               <div class="form-group"><label for="su-mid">Middle Name (optional)</label><input type="text" id="su-mid"></div>
-              <div class="form-group"><label for="su-email">Email Address</label><input type="email" id="su-email" placeholder="name@naga.edu.ph" required></div>
+              <div class="form-group"><label for="su-email">Email Address</label><input type="email" id="su-email" placeholder="name@naga.edu.ph" required><span class="auth-validation neutral" id="su-email-status" aria-live="polite">Enter a valid email address.</span></div>
+              <div class="signup-photo-picker"><img id="su-photo-preview" class="signup-photo-preview" alt="Profile preview"><div><label for="su-photo">Profile photo (optional)</label><input type="file" id="su-photo" accept="image/png,image/jpeg,image/webp"><small>JPG, PNG, or WebP up to 1 MB.</small><span class="auth-validation neutral" id="su-photo-status" aria-live="polite"></span></div></div>
             </div>
             <div class="auth-grid" id="su-student-fields">
-              <div class="form-group"><label for="su-id">Student ID (leave blank to auto-generate)</label><input type="text" id="su-id" inputmode="numeric" placeholder="e.g. 20261234"></div>
-              <div class="form-group"><label for="su-contact">Contact Number</label><input type="text" id="su-contact" placeholder="+63 917 000 0000"></div>
-              <div class="form-group"><label for="su-program">Academic Program</label><select id="su-program"></select></div>
+              <div class="form-group"><label for="su-id">Student ID (leave blank to auto-generate)</label><input type="text" id="su-id" inputmode="numeric" placeholder="e.g. 20261234"><span class="auth-validation neutral" id="su-id-status" aria-live="polite">Optional; leave blank to generate one.</span></div>
+              <div class="form-group"><label for="su-contact">Contact Number</label><div class="phone-input-wrap"><span class="phone-prefix">+63</span><input type="tel" id="su-contact" inputmode="numeric" maxlength="12" placeholder="917 000 0000" autocomplete="tel-national"></div><span class="auth-validation neutral" id="su-contact-status" aria-live="polite">Enter 10 digits starting with 9.</span></div>
+              <div class="form-group"><label for="su-program">Academic Program</label><select id="su-program" class="custom-select-native"></select><div class="custom-select" id="su-program-custom"></div></div>
               <div class="form-group">
                 <label for="su-year">Year Level</label>
-                <select id="su-year"><option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</option></select>
+                <select id="su-year" class="custom-select-native"><option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</select><div class="custom-select" id="su-year-custom"></div>
               </div>
             </div>
             <div class="auth-grid" id="su-admin-fields" style="display:none;">
@@ -800,13 +918,21 @@
               <div class="form-group"><label for="su-code">Administrator Access Code</label><input type="password" id="su-code" placeholder="Provided by the school"></div>
             </div>
             <div class="auth-grid">
-              <div class="form-group"><label for="su-pass">Password (min. 6 characters)</label><input type="password" id="su-pass" autocomplete="new-password" required></div>
-              <div class="form-group"><label for="su-pass2">Confirm Password</label><input type="password" id="su-pass2" autocomplete="new-password" required></div>
+              <div class="form-group"><label for="su-pass">Password (min. 8 characters)</label><input type="password" id="su-pass" class="has-password-status" autocomplete="new-password" minlength="8" required><span class="signup-password-status" id="su-pass-status" aria-hidden="true"></span><div class="password-rules" id="su-password-rules" aria-live="polite"><span data-rule="length">8+ characters</span><span data-rule="upper">Uppercase letter</span><span data-rule="lower">Lowercase letter</span><span data-rule="number">Number</span><span data-rule="special">Special character</span></div></div>
+              <div class="form-group"><label for="su-pass2">Confirm Password</label><input type="password" id="su-pass2" class="has-password-status" autocomplete="new-password" required><span class="signup-password-status" id="su-pass2-status" aria-hidden="true"></span></div>
             </div>
             <button type="submit" class="login-btn" id="su-submit-btn">Create Student Account</button>
           </form>
           <p class="auth-switch">Already have an account? <a onclick="showLogin()">Log in</a></p>
         </div>
+      </div>
+    </div>
+    <div id="email-confirm-view" class="view email-confirm-view">
+      <div class="email-confirm-card">
+        <div class="email-confirm-icon"><span class="material-symbols-outlined" style="font-size:32px;">mark_email_read</span></div>
+        <h2 style="color:#1E1B4B; margin-bottom:.65rem;">Check your email</h2>
+        <p id="email-confirm-message" style="color:#64748B; font-size:.82rem; line-height:1.6; margin-bottom:1.4rem;">We sent a confirmation link to your email address. Confirm it before logging in.</p>
+        <button type="button" class="login-btn" onclick="showLogin()">Back to login</button>
       </div>
     </div>
     <!-- STUDENT PORTAL VIEW (#app-view) -->
@@ -815,7 +941,7 @@
       <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
       <!-- Sidebar Navigation -->
       <aside class="sidebar" id="sidebar">
-        <div class="brand" onclick="navigateTo('dashboard')"><span class="material-symbols-outlined" style="background:#EEF2FF; padding: 6px; border-radius: 10px;">school</span> Enrolla</div>
+        <div class="brand" onclick="navigateTo('dashboard')"><svg class="portal-brand-logo" viewBox="0 0 340 100" role="img" aria-label="Enrolla"><use href="#enrolla-logo-g" /></svg></div>
         <ul class="nav-menu">
           <li class="active" data-target="dashboard"><a><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
           <li data-target="profile"><a><span class="material-symbols-outlined">person</span> Profile</a></li>
@@ -864,6 +990,19 @@
               </div>
             </div>
           </div>
+          <div class="card quick-actions-card">
+            <div class="card-header"><h3>Quick Actions</h3></div>
+            <div class="quick-actions-bar">
+              <div class="quick-actions-list" id="quick-actions-list">
+                <span class="quick-actions-empty">No quick actions added yet.</span>
+              </div>
+              <button class="quick-action-add" type="button" aria-expanded="false" onclick="toggleQuickActionPicker(event)">
+                <span class="quick-action-add-icon"><span class="material-symbols-outlined">add</span></span>
+                <span>Add a quick action</span>
+              </button>
+            </div>
+            <div class="quick-actions-picker" id="quick-actions-picker" role="menu" aria-label="Add a quick action"></div>
+          </div>
           <div class="dashboard-grid">
             <div class="dash-col">
               <div class="card">
@@ -908,19 +1047,6 @@
                   <span style="color:#065F46; font-weight:600;" id="dash-clearance-summary">None (Allowed to Enroll)</span>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="card" style="margin-top: 1.5rem;">
-            <div class="card-header"><h3>Quick Actions</h3></div>
-            <div class="quick-actions-grid">
-              <button class="action-btn btn-blue" onclick="navigateTo('subjects')"> <span class="material-symbols-outlined">menu_book</span> <div><h4>Browse Subjects</h4><p>View course catalog</p></div> </button>
-              <button class="action-btn btn-purple" onclick="navigateTo('enrollment')">
-                <span class="material-symbols-outlined">edit_document</span>
-                <div><h4>Enroll in Subjects</h4><p>Add or drop units</p></div>
-              </button>
-              <button class="action-btn btn-teal" onclick="navigateTo('profile')"> <span class="material-symbols-outlined">person</span> <div><h4>View Profile</h4><p>Manage personal data</p></div> </button>
-              <button class="action-btn btn-blue" onclick="navigateTo('requests')"> <span class="material-symbols-outlined">contact_support</span> <div><h4>Special Request</h4><p>Ask for an exception</p></div> </button>
-              <button class="action-btn btn-yellow" onclick="navigateTo('schedule')"> <span class="material-symbols-outlined">calendar_month</span> <div><h4>View Schedule</h4><p>See weekly timetable</p></div> </button>
             </div>
           </div>
         </div>
@@ -972,7 +1098,6 @@
           <div class="header">
             <div>
               <h1><span class="material-symbols-outlined" style="color: #10B981; font-size: 2.2rem; background: #D1FAE5; padding: 10px; border-radius: 14px;">menu_book</span> Course Catalog</h1>
-              <p style="color: var(--text-muted); font-size: 0.769rem; margin-top: 4px;">Explore all 2nd-Year Bachelor of Science in Information Technology subjects, prerequisites, and syllabi.</p>
             </div>
           </div>
           <div class="catalog-controls">
@@ -996,7 +1121,6 @@
           <div class="header">
             <div>
               <h1><span class="material-symbols-outlined" style="color: #F59E0B; font-size: 2.2rem; background: #FEF3C7; padding: 10px; border-radius: 14px;">calendar_month</span> Weekly Class Schedule</h1>
-              <p style="color: var(--text-muted); font-size: 0.752rem; margin-top: 4px;">Click any class block below to view room assignment, instructor details, or manage enrollment.</p>
             </div>
             <div class="header-actions"><button class="btn-primary-outline" onclick="openCORModal()"> <span class="material-symbols-outlined" style="font-size:18px;">print</span> Printable Timetable </button></div>
           </div>
@@ -1134,8 +1258,8 @@
                   <div class="info-group"><label>Last Name</label> <span class="view-mode" id="v-lname">Andrade</span> <input type="text" class="edit-mode" id="i-lname" value="Andrade" style="display:none;"></div>
                   <div class="info-group">
                     <label>Email Address</label>
-                    <span class="view-mode" id="v-email">jannica.andrade@naga.edu.ph</span>
-                    <input type="email" class="edit-mode" id="i-email" value="jannica.andrade@naga.edu.ph" style="display:none;">
+                    <span class="view-mode" id="v-email">student.demo@enrolla.test</span>
+                    <input type="email" class="edit-mode" id="i-email" value="student.demo@enrolla.test" style="display:none;">
                   </div>
                   <div class="info-group">
                     <label>Contact Number</label>
@@ -1180,8 +1304,8 @@
         <div id="requests" class="page">
           <div class="header">
             <div>
-              <h1>Special Requests</h1>
-              <p style="color: var(--text-muted); font-size: 0.769rem; margin-top: 2px;">Ask the Registrar for an exception, such as late enrollment, a unit overload, or a schedule or capacity override.</p>
+              <h1><span class="material-symbols-outlined" style="color: #6366F1; font-size: 2.2rem; background: #EEF2FF; padding: 10px; border-radius: 14px;">support_agent</span> Special Requests</h1>
+              <p style="color: var(--text-muted); font-size: 0.769rem; margin-top: 2px;">Submit a request for Registrar approval before dropping a subject or asking for an enrollment exception.</p>
             </div>
           </div>
           <div class="req-layout">
@@ -1210,7 +1334,7 @@
       <div id="admin-sidebar-overlay" class="sidebar-overlay" onclick="toggleAdminMobileSidebar()"></div>
       <!-- Admin Navy Sidebar -->
       <aside class="admin-sidebar" id="admin-sidebar">
-        <div class="admin-brand" onclick="navigateAdmin('admin-dashboard')"><span class="material-symbols-outlined" style="color:#6366F1; font-size:2rem;">school</span> Enrolla Admin</div>
+        <div class="admin-brand" onclick="navigateAdmin('admin-dashboard')"><svg class="portal-brand-logo" viewBox="0 0 340 100" role="img" aria-label="Enrolla"><use href="#enrolla-logo-g" /></svg></div>
         <div class="admin-brand-sub">Enrollment Management System</div>
         <ul class="admin-nav">
           <li class="active" data-admin-target="admin-dashboard"><a onclick="navigateAdmin('admin-dashboard')"> <span class="material-symbols-outlined">space_dashboard</span> Dashboard </a></li>
@@ -1486,7 +1610,7 @@
                 <div style="padding:12px 14px; border:1px solid var(--gray-200); border-radius:12px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
                   <div>
                     <span class="status-pill pill-open">Open</span>
-                    <p style="font-size:0.684rem; color:var(--gray-600); margin-top:4px;">Students can self-enroll and drop subjects freely within capacity limits.</p>
+                    <p style="font-size:0.684rem; color:var(--gray-600); margin-top:4px;">Students can self-enroll within capacity limits. Subject drops always require Registrar approval.</p>
                   </div>
                   <button class="admin-btn admin-btn-sm admin-btn-outline" onclick="simulatePeriodPreset('Open')">Simulate Open</button>
                 </div>
@@ -1520,7 +1644,7 @@
             <div class="admin-panel-header">
               <div>
                 <h3><span class="material-symbols-outlined" style="color:var(--navy-600);">support_agent</span> Special Requests</h3>
-                <p style="font-size:0.701rem; color:var(--gray-600);">Review student exception requests: late enrollment, unit overload, schedule conflict and full-subject overrides.</p>
+                <p style="font-size:0.701rem; color:var(--gray-600);">Review student requests, including subject drop approvals, late enrollment, unit overload, schedule conflict and full-subject overrides.</p>
               </div>
             </div>
             <div class="admin-toolbar">
@@ -1635,7 +1759,7 @@
               </select>
             </div>
             <div class="modal-field full-width">
-              <label>Login Password (leave blank to keep / use default "password123")</label>
+              <label>Login Password (leave blank to keep / use the demo password)</label>
               <input type="text" id="stu-form-password" placeholder="Min 6 characters" autocomplete="off">
             </div>
             <div class="modal-field full-width">
@@ -1849,26 +1973,47 @@
               <div class="modal-field"><label>Password</label> <input type="password" id="new-admin-pass" placeholder="Min 6 chars" required></div>
               <button type="submit" class="admin-btn admin-btn-navy" style="height:38px;">Create Admin</button>
             </form>
+            <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--gray-200);">
+              <button type="button" class="admin-btn admin-btn-outline" onclick="generateAdminAccessCode()"><span class="material-symbols-outlined" style="font-size:17px;">key</span> Generate one-time signup code</button>
+              <code id="generated-admin-code" style="display:none; margin-left:10px; padding:7px 10px; border-radius:8px; background:#EEF2FF; color:#3730A3; font-size:.8rem;"></code>
+              <p style="margin-top:6px; font-size:.68rem; color:var(--gray-600);">Share the code privately. It can be used once to register an administrator account.</p>
+            </div>
             <div id="existing-admins-list" style="margin-top:10px; font-size:0.667rem; color:var(--gray-600);"></div>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1"></script>
     <!-- JAVASCRIPT LOGIC (RELATIONAL DB + PORTAL + ADMIN) -->
     <script>
+        // ===== FORK SETUP: paste your Supabase values here =====
+        const SUPABASE_URL = 'https://eczeqokslwxegmgvmspp.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_KO-sJHiJKOmrSh6THCuu0g_QlzvdRPK';
+        const ENABLE_DEMO_ACCOUNTS = true;
+        const BACKEND_MODE = SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY';
+        const supabaseClient = BACKEND_MODE && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
         // shorthand used throughout the script
         const byId = id => document.getElementById(id);
         const MAX_UNITS = 24;
         const MAX_UNITS_CEILING = 30;
-        const ADMIN_SIGNUP_CODE = 'ENROLLA-ADMIN-2026'; // required to register a new administrator account
-        const DEMO_STUDENT_PASSWORD = 'password123'; // default password for students that have no password set
+        const DEMO_STUDENT_PASSWORD = 'Demo@12345'; // local-only public demo password
         const STORAGE_KEY = 'enrolla_relational_db_v3';
         let isEditMode = false;
         let activeCatalogFilter = 'All';
         let currentSession = { role: null, userId: null, name: null };
         let signupType = 'student';
+        let signupAvatarData = '';
+        let localAdminSignupCode = '';
         let lastEnrollmentKey = null;
         let memoryStorageFallback = {};
+        let realtimeChannels = [];
+        let backendRestorePromise = null;
+        let restoredBackendSessionId = null;
+        let signupSubmitting = false;
+        let signupCooldownTimer = null;
+        let suppressBackendStartupErrors = false;
+        let backendErrorBurstAt = 0;
+        let backendErrorBurstShown = false;
 
         // Safe Storage Helpers (Prevents SecurityError in sandboxed iframes or file:// contexts)
         function safeGetItem(key) {
@@ -1887,6 +2032,31 @@
             try { if (window.localStorage) window.localStorage.removeItem(key); } catch (e) {
                 // Ignore
             }
+        }
+        function showDemoModeBanner() {
+            if (BACKEND_MODE || byId('demo-mode-banner')) return;
+            const banner = document.createElement('div');
+            banner.id = 'demo-mode-banner';
+            banner.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:500;max-width:calc(100% - 24px);padding:10px 14px;border:1px solid #FDE68A;border-radius:10px;background:#FFFBEB;color:#92400E;font-size:12px;box-shadow:0 6px 18px rgba(15,23,42,.12);display:flex;align-items:center;gap:12px;';
+            banner.innerHTML = '<span>Demo mode: data is only saved in this browser. Configure Supabase to enable shared data.</span><button type="button" aria-label="Dismiss demo mode notice" style="border:0;background:transparent;color:inherit;font-size:18px;cursor:pointer;line-height:1;" onclick="this.parentElement.remove()">×</button>';
+            document.body.appendChild(banner);
+        }
+        function backendError(context, error) {
+            console.error(`[Supabase] ${context}`, error);
+            if (suppressBackendStartupErrors) return;
+            const now = Date.now();
+            if (now - backendErrorBurstAt > 5000) {
+                backendErrorBurstAt = now;
+                backendErrorBurstShown = false;
+            }
+            if (backendErrorBurstShown) return;
+            backendErrorBurstShown = true;
+            showToast(`${context} failed. Please try again.`, 'error');
+        }
+        async function supabaseQuery(query, context) {
+            const { data, error } = await query;
+            if (error) { backendError(context, error); throw error; }
+            return data;
         }
 
         // Table Sorting & Pagination State
@@ -2207,7 +2377,7 @@
         ];
         const DEFAULT_STUDENTS = [
             {
-                studentId: '12345678', fullName: 'Jannica Lhei B. Andrade', email: 'jannica.andrade@naga.edu.ph', contact: '+63 917 842 9104',
+                studentId: '12345678', fullName: 'Jannica Lhei B. Andrade', email: 'student.demo@enrolla.test', contact: '+63 917 842 9104',
                 programCode: 'BSIT', yearLevel: '2nd Year', enrollmentStatus: 'Enrolled'
             },
             {
@@ -2256,7 +2426,7 @@
             mode: 'manual', manualStatus: 'Open', startDateTime: '2026-08-01T08:00', endDateTime: '2026-12-15T23:59', academicYear: '2026 - 2027',
             semester: '1st Semester (Fall)'
         };
-        const DEFAULT_ADMINS = [{ username: 'admin', fullName: 'System Administrator', passwordHash: hashPassword('admin123'), role: 'Super Admin' }];
+        const DEFAULT_ADMINS = [{ username: 'admin.demo@enrolla.test', fullName: 'Demo Administrator', passwordHash: hashPassword('Demo@12345'), role: 'Administrator' }];
         const DEFAULT_AUDIT_LOGS = [
             {
                 id: 1, timestamp: '2026-08-21 08:00:00', actor: 'admin', role: 'Super Admin', module: 'Settings', action: 'OPEN_ENROLLMENT',
@@ -2271,7 +2441,7 @@
             fname: 'Jannica Lhei',
             mname: 'Barcenas',
             lname: 'Andrade',
-            email: 'jannica.andrade@naga.edu.ph',
+            email: 'student.demo@enrolla.test',
             phone: '+63 917 842 9104',
             dob: 'May 14, 2006',
             campus: 'Naga Campus, Central Visayas',
@@ -2341,7 +2511,94 @@
         let specialRequests = [];
 
         // STATE PERSISTENCE
-        function loadState() {
+        async function loadBackendState() {
+            const [programRows, courseRows, enrollmentRows, requestRows, profileRows] = await Promise.all([
+                supabaseQuery(supabaseClient.from('programs').select('*').order('code'), 'Loading programs'),
+                supabaseQuery(supabaseClient.from('courses').select('*').order('code'), 'Loading courses'),
+                supabaseQuery(supabaseClient.from('enrollments').select('*, courses(code)'), 'Loading enrollments'),
+                supabaseQuery(supabaseClient.from('special_requests').select('*, courses(code)').order('created_at', { ascending: false }), 'Loading requests'),
+                supabaseQuery(supabaseClient.from('profiles').select('*'), 'Loading profiles')
+            ]);
+            let settingRows = [];
+            try {
+                const { data, error } = await supabaseClient.from('enrollment_settings').select('*').limit(1);
+                if (error) throw error;
+                settingRows = data || [];
+            } catch (error) {
+                console.warn('[Supabase] Enrollment settings unavailable; using local defaults.', error);
+                settingRows = [];
+            }
+            let auditRows = [];
+            if (currentSession.role === 'admin' || currentSession.role === 'super_admin') {
+                auditRows = await supabaseQuery(supabaseClient.from('audit_logs').select('*').order('created_at', { ascending: false }), 'Loading audit logs');
+            }
+            programs = (programRows || []).map(p => ({ ...p, subjectCodes: p.subject_codes || [] }));
+            if (!programs.length) programs = JSON.parse(JSON.stringify(DEFAULT_PROGRAMS));
+            courses = (courseRows || []).map(c => ({
+                ...c, id: c.id, code: c.code, name: c.name, title: c.title || `${c.code} - ${c.name}`,
+                desc: c.description || c.desc || '', programCode: c.program_code, maxCapacity: c.max_capacity,
+                enrolledCount: c.enrolled_count || 0, scheduleText: c.schedule_text, details: c.details || '',
+                startHour: c.start_hour, duration: c.duration, type: c.course_type || c.type, prereq: c.prerequisite || c.prereq || '', topics: c.topics || [],
+                status: 'available'
+            }));
+            enrollmentSettings = settingRows?.[0] ? {
+                ...settingRows[0], mode: settingRows[0].mode === 'automatic' ? 'auto' : settingRows[0].mode,
+                startDateTime: settingRows[0].start_date_time, endDateTime: settingRows[0].end_date_time,
+                manualStatus: settingRows[0].manual_status, academicYear: settingRows[0].academic_year
+            } : { ...DEFAULT_SETTINGS };
+            const profileById = new Map((profileRows || []).map(p => [p.id, p]));
+            enrollments = (enrollmentRows || []).map(e => ({
+                ...e,                 id: e.id, studentId: profileById.get(e.student_id)?.student_id || e.student_id, subjectCode: e.courses?.code || e.subject_code || '', courseId: e.course_id, programCode: e.program_code,
+                dateSubmitted: e.date_submitted || e.created_at, status: e.status
+            }));
+            specialRequests = (requestRows || []).map(r => ({
+                ...r, id: r.id, studentId: profileById.get(r.student_id)?.student_id || r.student_id, subjectCode: r.courses?.code || r.subject_code || '',
+                dateSubmitted: r.date_submitted || r.created_at, adminRemark: r.admin_remark,
+                decidedBy: r.decided_by, decidedAt: r.decided_at
+            }));
+            auditLogs = (auditRows || []).map(a => ({
+                ...a, id: a.id, timestamp: a.created_at || a.timestamp, actor: a.actor_id || a.actor,
+                module: a.module, action: a.action, details: a.details
+            }));
+            students = (profileRows || []).filter(p => p.role === 'student').map(p => ({
+                id: p.id, userId: p.id, studentId: p.student_id || p.id, fullName: p.full_name || 'Student',
+                email: p.email || '', contact: p.contact || 'Not provided', programCode: p.program || p.program_code || '',
+                yearLevel: p.year_level || '', enrollmentStatus: p.enrollment_status || 'Not Enrolled',
+                registeredOn: p.created_at, isDemo: !!p.is_demo
+            }));
+            admins = (profileRows || []).filter(p => p.role === 'admin' || p.role === 'super_admin').map(p => ({
+                id: p.id, userId: p.id, username: p.email, email: p.email, fullName: p.full_name || 'Administrator',
+                role: p.role, isDemo: !!p.is_demo
+            }));
+            if (currentSession.role === 'student' && currentSession.userId) {
+                const profile = profileRows.find(p => p.id === currentSession.userId || p.student_id === currentSession.userId);
+                if (profile) {
+                    currentSession.userId = profile.student_id || profile.id;
+                    activateStudent(currentSession.userId);
+                }
+                const [dataRow, notificationRows] = await Promise.all([
+                    supabaseQuery(supabaseClient.from('student_profile_data').select('*').eq('profile_id', profile?.id || currentSession.userId).maybeSingle(), 'Loading profile data'),
+                    supabaseQuery(supabaseClient.from('notifications').select('*').eq('profile_id', profile?.id || currentSession.userId).order('created_at', { ascending: false }), 'Loading notifications')
+                ]);
+                if (dataRow) {
+                    profileData = dataRow.profile || {
+                        fname: dataRow.first_name || '', mname: dataRow.middle_name || '', lname: dataRow.last_name || '',
+                        email: profile?.email || '', phone: dataRow.phone || '', dob: dataRow.date_of_birth || '',
+                        campus: dataRow.campus || '', address: dataRow.address || '', guardian: dataRow.guardian || '',
+                        avatar: dataRow.avatar_url || ''
+                    };
+                    medicalCleared = !!dataRow.medical_cleared;
+                }
+                notifications = (notificationRows || []).map(n => ({ ...n, id: n.id, text: n.text, unread: n.unread, target: n.target || 'dashboard' }));
+                if (studentStore[currentSession.userId]) studentStore[currentSession.userId].notifications = notifications;
+            }
+            syncStudentCoursesWithEnrollments();
+        }
+        async function loadState() {
+            if (BACKEND_MODE) {
+                await loadBackendState();
+                return;
+            }
             try {
                 const raw = safeGetItem(STORAGE_KEY);
                 if (raw) {
@@ -2386,10 +2643,66 @@
             medicalCleared = false;
             syncStudentCoursesWithEnrollments();
         }
+        async function saveBackendState() {
+            if (!supabaseClient) return;
+            if (currentSession.role === 'student' && currentSession.userId) {
+                const profile = students.find(s => s.studentId === currentSession.userId);
+                const authUser = (await supabaseClient.auth.getUser()).data.user;
+                if (authUser) {
+                    const dateOfBirth = /^\d{4}-\d{2}-\d{2}$/.test(profileData.dob || '') ? profileData.dob : null;
+                    await supabaseQuery(supabaseClient.from('student_profile_data').upsert({
+                        profile_id: authUser.id, first_name: profileData.fname, middle_name: profileData.mname,
+                        last_name: profileData.lname, phone: profileData.phone, date_of_birth: dateOfBirth,
+                        campus: profileData.campus, address: profileData.address, guardian: profileData.guardian,
+                        avatar_url: profileData.avatar, medical_cleared: medicalCleared
+                    }, { onConflict: 'profile_id' }), 'Saving profile data');
+                    await supabaseQuery(supabaseClient.from('notifications').upsert((notifications || []).map(n => ({
+                        ...(typeof n.id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(n.id) ? { id: n.id } : {}),
+                        profile_id: authUser.id, text: n.text, icon: n.icon, target: n.target,
+                        unread: !!n.unread
+                    })), { onConflict: 'id' }), 'Saving notifications');
+                    await supabaseQuery(supabaseClient.from('enrollments').upsert(enrollments.filter(e => e.studentId === currentSession.userId).map(e => ({
+                        id: e.id, student_id: authUser.id, course_id: e.courseId || courses.find(c => c.code === e.subjectCode)?.id,
+                        program_code: e.programCode,
+                        status: e.status, date_submitted: e.dateSubmitted
+                    })), { onConflict: 'id' }), 'Saving enrollments');
+                    await supabaseQuery(supabaseClient.from('special_requests').upsert(specialRequests.filter(r => r.studentId === currentSession.userId).map(r => ({
+                        id: r.id, student_id: authUser.id, type: r.type, course_id: courses.find(c => c.code === r.subjectCode)?.id || null,
+                        units: r.units, reason: r.reason, status: r.status, date_submitted: r.dateSubmitted,
+                        admin_remark: r.adminRemark, decided_by: r.decidedBy, decided_at: r.decidedAt
+                    })), { onConflict: 'id' }), 'Saving requests');
+                }
+            }
+            if (currentSession.role === 'admin' || currentSession.role === 'super_admin') {
+                await Promise.all([
+                    supabaseQuery(supabaseClient.from('courses').upsert(courses.map(c => ({
+                        id: c.id, code: c.code, name: c.name, title: c.title, description: c.desc,
+                        instructor: c.instructor, room: c.room, schedule_text: c.scheduleText, details: c.details,
+                        units: c.units, program_code: c.programCode, max_capacity: c.maxCapacity,
+                        enrolled_count: c.enrolledCount, course_type: c.type, days: c.days, start_hour: c.startHour,
+                        duration: c.duration, color: c.color, prerequisite: c.prereq, topics: c.topics
+                    })), { onConflict: 'id' }), 'Saving courses'),
+                    supabaseQuery(supabaseClient.from('programs').upsert(programs.map(p => ({
+                        code: p.code, name: p.name, department: p.department, description: p.description,
+                        subject_codes: p.subjectCodes || []
+                    })), { onConflict: 'code' }), 'Saving programs'),
+                    supabaseQuery(supabaseClient.from('enrollment_settings').upsert({
+                        id: enrollmentSettings.id || 1, mode: enrollmentSettings.mode === 'auto' ? 'automatic' : enrollmentSettings.mode,
+                        manual_status: enrollmentSettings.manualStatus, start_date_time: enrollmentSettings.startDateTime,
+                        end_date_time: enrollmentSettings.endDateTime, academic_year: enrollmentSettings.academicYear,
+                        semester: enrollmentSettings.semester
+                    }, { onConflict: 'id' }), 'Saving settings')
+                ]);
+            }
+        }
         function saveState() {
             try {
                 if (currentSession.role === 'student' && currentSession.userId) {
                     studentStore[currentSession.userId] = { profile: profileData, notifications, medicalCleared };
+                }
+                if (BACKEND_MODE) {
+                    saveBackendState().catch(error => console.error('[Supabase] Save failed', error));
+                    return;
                 }
                 safeSetItem(STORAGE_KEY, JSON.stringify({
                     courses, programs, students, enrollments, enrollmentSettings, admins, auditLogs, studentStore, specialRequests
@@ -2540,7 +2853,7 @@
                     updateAllViews();
                     showToast(status === 'Deadline Passed' ? 'The enrollment deadline has passed. Subject changes are now locked.' :
                         `Enrollment status is now: ${status}.`, status === 'Open' ? 'success' : 'warning');
-                } else if (currentSession.role === 'admin') {
+                } else if (currentSession.role === 'admin' || currentSession.role === 'super_admin') {
                     renderAllAdminViews();
                     showToast(`Enrollment status changed automatically: ${status}.`, 'info');
                 }
@@ -2551,7 +2864,7 @@
             const nowStr = new Date().toISOString().replace('T', ' ').substring(0, 19);
             auditLogs.unshift({
                 id: Date.now(), timestamp: nowStr, actor: currentSession.userId || 'admin',
-                role: currentSession.role === 'admin' ? 'Administrator' : 'Student', module, action, details
+                role: currentSession.role === 'admin' || currentSession.role === 'super_admin' ? 'Administrator' : 'Student', module, action, details
             });
             saveState();
         }
@@ -2586,6 +2899,11 @@
         function showToast(message, type = 'success') {
             const container = byId('toast-container');
             if (!container) return;
+            const toastKey = `${type}:${message}`;
+            const now = Date.now();
+            if (showToast.lastKey === toastKey && now - showToast.lastAt < 1200) return;
+            showToast.lastKey = toastKey;
+            showToast.lastAt = now;
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             const iconMap = { success: 'check_circle', warning: 'warning', error: 'error', info: 'info' };
@@ -2633,24 +2951,81 @@
         window.togglePasswordVisibility = togglePasswordVisibility;
         function showLogin(noticeHtml) {
             byId('signup-view').style.display = 'none';
+            byId('email-confirm-view').style.display = 'none';
+            byId('app-view').style.display = 'none';
+            byId('admin-view').style.display = 'none';
             byId('login-view').style.display = 'flex';
+            if (window.location.hash === '#signup') window.history.replaceState(null, '', window.location.pathname + window.location.search);
             const n = byId('login-notice');
             if (noticeHtml) { n.innerHTML = noticeHtml; n.style.display = 'block'; } else { n.style.display = 'none'; }
         }
         window.showLogin = showLogin;
+        function closeCustomSelects(except) {
+          document.querySelectorAll('.custom-select.open').forEach(select => {
+            if (select !== except) select.classList.remove('open');
+          });
+        }
+        function renderCustomSelect(selectId) {
+          const select = byId(selectId);
+          const custom = byId(`${selectId}-custom`);
+          if (!select || !custom) return;
+          const selected = select.options[select.selectedIndex];
+          custom.innerHTML = `<button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false"><span>${escapeHtml(selected?.textContent || '')}</span><span class="material-symbols-outlined">expand_more</span></button><div class="custom-select-menu" role="listbox">${[...select.options].map(option => `<button type="button" class="custom-select-option${option.selected ? ' selected' : ''}" data-value="${escapeHtml(option.value)}" role="option">${escapeHtml(option.textContent)}</button>`).join('')}</div>`;
+          const trigger = custom.querySelector('.custom-select-trigger');
+          trigger.addEventListener('click', () => {
+            const isOpen = custom.classList.contains('open');
+            closeCustomSelects(custom);
+            custom.classList.toggle('open', !isOpen);
+            trigger.setAttribute('aria-expanded', String(!isOpen));
+          });
+          custom.querySelectorAll('.custom-select-option').forEach(option => option.addEventListener('click', () => {
+            select.value = option.dataset.value;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            renderCustomSelect(selectId);
+          }));
+        }
+        function setupCustomSignupSelects() {
+          renderCustomSelect('su-program');
+          renderCustomSelect('su-year');
+          document.addEventListener('click', event => {
+            if (!event.target.closest('.custom-select')) closeCustomSelects();
+          });
+        }
         function populateSignupPrograms() {
             const sel = byId('su-program');
-            if (sel) sel.innerHTML = programs.map(p => `<option value="${escapeHtml(p.code)}">${escapeHtml(p.code)} - ${escapeHtml(p.name)}</option>`).join('');
+          if (sel) {
+            const availablePrograms = programs.length ? programs : DEFAULT_PROGRAMS;
+            sel.innerHTML = availablePrograms.map(p => `<option value="${escapeHtml(p.code)}">${escapeHtml(p.code)} - ${escapeHtml(p.name)}</option>`).join('');
+            renderCustomSelect('su-program');
+          }
         }
         function showSignup(type) {
             populateSignupPrograms();
             byId('signup-form').reset();
+            signupAvatarData = '';
+            const photoPreview = byId('su-photo-preview');
+            if (photoPreview) photoPreview.src = makeAvatar('New', 'Student');
+            setSignupStatus('su-photo-status', 'neutral', '');
             clearSignupError();
             setSignupType(type || 'student');
+            updateSignupEmailStatus();
+            updateSignupStudentIdStatus();
+            updateSignupPasswordStatus();
+            updateSignupConfirmPasswordStatus();
+            renderCustomSelect('su-program');
+            renderCustomSelect('su-year');
             byId('login-view').style.display = 'none';
+            byId('email-confirm-view').style.display = 'none';
+            byId('app-view').style.display = 'none';
+            byId('admin-view').style.display = 'none';
             byId('signup-view').style.display = 'flex';
+            if (window.history.state?.authView !== 'signup') window.history.pushState({ authView: 'signup' }, '', '#signup');
         }
         window.showSignup = showSignup;
+        window.addEventListener('popstate', () => {
+            if (window.location.hash === '#signup') showSignup(signupType);
+            else showLogin();
+        });
         function setSignupType(type) {
             signupType = type === 'admin' ? 'admin' : 'student';
             clearSignupError();
@@ -2664,6 +3039,135 @@
             byId('su-submit-btn').innerText = isAdmin ? 'Create Administrator Account' : 'Create Student Account';
         }
         window.setSignupType = setSignupType;
+        function setSignupStatus(id, state, message) {
+          const el = byId(id);
+          if (!el) return;
+          el.className = `auth-validation ${state}`;
+          el.innerText = message;
+        }
+        function updateSignupEmailStatus() {
+          const email = (byId('su-email')?.value || '').trim();
+          if (!email) { setSignupStatus('su-email-status', 'neutral', 'Enter a valid email address.'); return false; }
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setSignupStatus('su-email-status', 'invalid', 'Enter a valid email address.'); return false; }
+          const taken = students.some(x => (x.email || '').toLowerCase() === email.toLowerCase()) || admins.some(a =>
+            (a.email || '').toLowerCase() === email.toLowerCase());
+          if (taken) { setSignupStatus('su-email-status', 'invalid', 'This email is already registered.'); return false; }
+          setSignupStatus('su-email-status', 'valid', 'Valid and available email.');
+          return true;
+        }
+        function updateSignupStudentIdStatus() {
+          const studentId = (byId('su-id')?.value || '').trim();
+          if (!studentId) { setSignupStatus('su-id-status', 'neutral', 'Optional; leave blank to generate one.'); return true; }
+          if (!/^\d{4,20}$/.test(studentId)) {
+            setSignupStatus('su-id-status', 'invalid', 'Use 4-20 numbers only.');
+            return false;
+          }
+          if (students.some(x => x.studentId.toLowerCase() === studentId.toLowerCase()) || admins.some(a =>
+            a.username.toLowerCase() === studentId.toLowerCase())) {
+            setSignupStatus('su-id-status', 'invalid', 'This ID is already in use.');
+            return false;
+          }
+          setSignupStatus('su-id-status', 'valid', 'Valid and available student ID.');
+          return true;
+        }
+        function updateSignupContactStatus() {
+          const contact = (byId('su-contact')?.value || '').trim();
+          if (!contact) {
+            setSignupStatus('su-contact-status', 'neutral', 'Enter 10 digits starting with 9.');
+            return true;
+          }
+          const digits = contact.replace(/\D/g, '');
+          const valid = /^9\d{9}$/.test(digits);
+          setSignupStatus('su-contact-status', valid ? 'valid' : 'invalid', valid ? 'Valid Philippine mobile number.' : 'Enter exactly 10 digits starting with 9.');
+          return valid;
+        }
+        function normalizedSignupContact() {
+          const digits = (byId('su-contact')?.value || '').replace(/\D/g, '');
+          return digits ? `+63${digits}` : '';
+        }
+        function updateSignupPasswordStatus() {
+          const password = byId('su-pass')?.value || '';
+          byId('su-password-rules')?.classList.toggle('visible', password.length > 0);
+          const rules = {
+            length: password.length >= 8,
+            upper: /[A-Z]/.test(password),
+            lower: /[a-z]/.test(password),
+            number: /\d/.test(password),
+            special: /[^A-Za-z0-9]/.test(password)
+          };
+          Object.entries(rules).forEach(([name, valid]) => {
+            const rule = document.querySelector(`#su-password-rules [data-rule="${name}"]`);
+                if (rule) {
+                  rule.className = valid ? 'passed' : (password ? 'invalid' : '');
+                  if (valid) {
+                    setTimeout(() => {
+                      if (rule.classList.contains('passed')) rule.classList.add('hidden');
+                    }, 230);
+                  }
+                }
+          });
+          const passwordValid = Object.values(rules).every(Boolean);
+          const checklist = byId('su-password-rules');
+          checklist?.classList.toggle('empty', passwordValid);
+          setPasswordStatus('su-pass-status', password, passwordValid);
+          updateSignupConfirmPasswordStatus();
+          return passwordValid;
+        }
+        function setPasswordStatus(id, value, valid) {
+          const el = byId(id);
+          const input = byId(id === 'su-pass-status' ? 'su-pass' : 'su-pass2');
+          if (!el) return;
+          if (input) {
+            input.classList.remove('password-valid', 'password-invalid');
+            if (value) input.classList.add(valid ? 'password-valid' : 'password-invalid');
+          }
+          el.innerText = '';
+        }
+        function updateSignupConfirmPasswordStatus() {
+          const password = byId('su-pass')?.value || '';
+          const confirmation = byId('su-pass2')?.value || '';
+          const matches = confirmation.length > 0 && password === confirmation;
+          setPasswordStatus('su-pass2-status', confirmation, matches);
+          return matches;
+        }
+        function setupSignupValidation() {
+          byId('su-email')?.addEventListener('input', updateSignupEmailStatus);
+          byId('su-id')?.addEventListener('input', updateSignupStudentIdStatus);
+          byId('su-contact')?.addEventListener('input', updateSignupContactStatus);
+          byId('su-contact')?.addEventListener('input', event => {
+            event.target.value = event.target.value.replace(/\D/g, '').slice(0, 10);
+          });
+          byId('su-pass')?.addEventListener('input', updateSignupPasswordStatus);
+          byId('su-pass2')?.addEventListener('input', updateSignupConfirmPasswordStatus);
+          byId('su-photo')?.addEventListener('change', handleSignupPhoto);
+        }
+        function handleSignupPhoto(event) {
+          const file = event.target.files?.[0];
+          signupAvatarData = '';
+          if (!file) {
+            setSignupStatus('su-photo-status', 'neutral', '');
+            return;
+          }
+          if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+            event.target.value = '';
+            setSignupStatus('su-photo-status', 'invalid', 'Choose a JPG, PNG, or WebP image.');
+            return;
+          }
+          if (file.size > 1024 * 1024) {
+            event.target.value = '';
+            setSignupStatus('su-photo-status', 'invalid', 'Image must be 1 MB or smaller.');
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = () => {
+            signupAvatarData = String(reader.result || '');
+            const preview = byId('su-photo-preview');
+            if (preview) preview.src = signupAvatarData;
+            setSignupStatus('su-photo-status', 'valid', 'Profile photo ready.');
+          };
+          reader.onerror = () => setSignupStatus('su-photo-status', 'invalid', 'Could not read that image.');
+          reader.readAsDataURL(file);
+        }
         function signupError(msg) {
             const el = byId('signup-error');
             el.innerText = msg;
@@ -2672,25 +3176,96 @@
             showToast(msg, 'error');
         }
         function clearSignupError() { const el = byId('signup-error'); if (el) el.style.display = 'none'; }
-        function handleSignupSubmit(e) {
+        function setSignupSubmitting(submitting, label) {
+            const button = byId('su-submit-btn');
+            signupSubmitting = submitting;
+            if (!button) return;
+            button.disabled = submitting;
+            button.setAttribute('aria-busy', String(submitting));
+            if (label) button.innerText = label;
+        }
+        function startSignupCooldown(seconds) {
+            const button = byId('su-submit-btn');
+            if (signupCooldownTimer) clearInterval(signupCooldownTimer);
+            let remaining = seconds;
+            setSignupSubmitting(true, `Try again in ${remaining}s`);
+            signupCooldownTimer = setInterval(() => {
+                remaining -= 1;
+                if (remaining <= 0) {
+                    clearInterval(signupCooldownTimer);
+                    signupCooldownTimer = null;
+                    setSignupSubmitting(false, signupType === 'admin' ? 'Create Administrator Account' : 'Create Student Account');
+                    return;
+                }
+                if (button) button.innerText = `Try again in ${remaining}s`;
+            }, 1000);
+        }
+        function formatSignupAuthError(message) {
+            const normalized = String(message || '').toLowerCase();
+            if (normalized.includes('rate limit') || normalized.includes('email rate')) {
+                return 'Please wait a moment before trying again.';
+            }
+            if (normalized.includes('already registered') || normalized.includes('already been registered')) {
+                return 'That email is already registered. Use Log in or Forgot password instead.';
+            }
+            return message || 'We could not create the account. Please try again.';
+        }
+        async function handleSignupSubmit(e) {
             e.preventDefault();
+            if (signupSubmitting) return;
             clearSignupError();
             const val = id => (byId(id).value || '').trim();
             const first = val('su-first'), mid = val('su-mid'), last = val('su-last'), email = val('su-email');
+            const contact = normalizedSignupContact();
             const pass = byId('su-pass').value, pass2 = byId('su-pass2').value;
             if ([first, mid, last, email, val('su-id'), val('su-contact'), val('su-username')].some(f => /[<>]/.test(f))) {
                 signupError('Please remove the characters < and > from your details.');
                 return;
             }
             if (!first || !last) { signupError('First name and last name are required.'); return; }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { signupError('Please enter a valid email address.'); return; }
+            if (signupType === 'student' && !updateSignupContactStatus()) { signupError('Please enter a valid Philippine mobile number.'); return; }
+            if (!updateSignupEmailStatus()) { signupError('Please enter a valid, available email address.'); return; }
             const emailTaken = students.some(x => (x.email || '').toLowerCase() === email.toLowerCase()) || admins.some(a => (a.email ||
                 '').toLowerCase() === email.toLowerCase());
             if (emailTaken) { signupError('An account with this email already exists.'); return; }
-            if (pass.length < 6) { signupError('Password must be at least 6 characters.'); return; }
+            if (!updateSignupPasswordStatus()) { signupError('Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.'); return; }
             if (pass !== pass2) { signupError('Passwords do not match.'); return; }
             const midInit = mid ? mid.charAt(0).toUpperCase() + '. ' : '';
             const fullName = `${first} ${midInit}${last}`;
+            if (BACKEND_MODE) {
+                setSignupSubmitting(true, 'Creating account...');
+                const studentId = val('su-id') || `2026${Math.floor(1000 + Math.random() * 9000)}`;
+                try {
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email, password: pass,
+                        options: { data: { student_id: signupType === 'admin' ? null : studentId, username: signupType === 'admin' ? val('su-username') : null, full_name: fullName, program: val('su-program'), year_level: val('su-year'), contact, avatar_url: signupAvatarData || '', admin_signup_code: signupType === 'admin' ? val('su-code') : null } }
+                    });
+                    if (error) {
+                        const message = formatSignupAuthError(error.message);
+                        signupError(message);
+                        if (/rate.?limit|email rate/i.test(error.message || '')) startSignupCooldown(5);
+                        return;
+                    }
+                    if (signupType === 'admin') {
+                        const code = val('su-code');
+                        if (data.session) {
+                            const claim = await supabaseClient.rpc('claim_admin_signup_code', { p_code: code, p_user_id: data.user?.id });
+                            if (claim.error || !claim.data) { signupError('The account was created, but the access code was invalid or already used. Contact an administrator.'); return; }
+                        }
+                    }
+                    if (data.session) showLogin('Account created. You can now log in.');
+                    else {
+                        byId('signup-view').style.display = 'none';
+                        byId('email-confirm-view').style.display = 'flex';
+                        byId('email-confirm-message').innerText = `We sent a confirmation link to ${email}. Confirm it before logging in.`;
+                    }
+                    byId('login-id').value = email;
+                    byId('login-pass').value = '';
+                } finally {
+                    if (!signupCooldownTimer) setSignupSubmitting(false, signupType === 'admin' ? 'Create Administrator Account' : 'Create Student Account');
+                }
+                return;
+            }
             if (signupType === 'admin') {
                 const username = val('su-username');
                 const code = byId('su-code').value.trim();
@@ -2702,7 +3277,7 @@
                     signupError(`Username "${username}" is already taken.`);
                     return;
                 }
-                if (code !== ADMIN_SIGNUP_CODE) { signupError('Invalid administrator access code.'); return; }
+                if (!code || (localAdminSignupCode && code !== localAdminSignupCode)) { signupError('Enter a valid one-time administrator access code.'); return; }
                 admins.push({ username, fullName, email, passwordHash: hashPassword(pass), role: 'Administrator', createdAt: nowStamp() });
                 logAuthEvent(username, 'Administrator', 'Security', 'REGISTER_ADMIN',
                     `New administrator account "${username}" (${fullName}) registered from the sign-up page.`);
@@ -2715,14 +3290,7 @@
             }
             let studentId = val('su-id');
             if (studentId) {
-                if (!/^[A-Za-z0-9-]{4,20}$/.test(studentId)) {
-                    signupError('Student ID can only contain letters, numbers and dashes (4 to 20 characters).');
-                    return;
-                }
-                if (students.some(x => x.studentId === studentId)) {
-                    signupError(`Student ID ${studentId} is already registered.`);
-                    return;
-                }
+              if (!updateSignupStudentIdStatus()) { signupError('Please enter a valid and available Student ID.'); return; }
             } else {
                 do { studentId = '2026' + Math.floor(1000 + Math.random() * 9000); } while (students.some(x => x.studentId === studentId));
             }
@@ -2730,15 +3298,15 @@
                 signupError('That ID is not available.');
                 return;
             }
-            const contact = val('su-contact') || 'Not provided';
+            const localContact = contact || 'Not provided';
             students.unshift({
-                studentId, fullName, email, contact, programCode: val('su-program'), yearLevel: val('su-year'), enrollmentStatus: 'Not Enrolled',
-                passwordHash: hashPassword(pass), registeredOn: nowStamp()
+                studentId, fullName, email, contact: localContact, programCode: val('su-program'), yearLevel: val('su-year'), enrollmentStatus: 'Not Enrolled',
+                passwordHash: hashPassword(pass), registeredOn: nowStamp(), avatar: signupAvatarData || makeAvatar(first, last)
             });
             studentStore[studentId] = {
                 profile: {
-                    fname: first, mname: mid, lname: last, email, phone: contact, dob: 'Not provided', campus: 'Naga Campus, Central Visayas',
-                    address: 'Not provided', guardian: 'Not provided', avatar: makeAvatar(first, last)
+                    fname: first, mname: mid, lname: last, email, phone: localContact, dob: 'Not provided', campus: 'Naga Campus, Central Visayas',
+                    address: 'Not provided', guardian: 'Not provided', avatar: signupAvatarData || makeAvatar(first, last)
                 },
                 notifications: [
                     {
@@ -2777,11 +3345,188 @@
             byId('app-view').style.display = 'none';
             byId('admin-view').style.display = 'flex';
             byId('admin-sidebar-user').innerText = admin.fullName;
+            setDemoBadge(!!admin.isDemo);
             logAdminAction('Auth', 'ADMIN_LOGIN', `Administrator ${admin.username} logged in.`);
             navigateAdmin('admin-dashboard');
             lastEnrollmentKey = enrollmentStateKey();
             showToast(`Welcome, ${admin.fullName}!`, 'success');
         }
+        async function restoreBackendSession(session) {
+            if (!session?.user || !supabaseClient) return;
+            if (restoredBackendSessionId === session.user.id && currentSession.role) return;
+            if (backendRestorePromise) return backendRestorePromise;
+            backendRestorePromise = (async () => {
+            const metadata = session.user.user_metadata || {};
+            let profileQuery = await supabaseClient.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
+            if (profileQuery.error) throw profileQuery.error;
+            let profile = profileQuery.data;
+            if (!profile) {
+                const profileInsert = await supabaseClient.from('profiles').upsert({
+                    id: session.user.id,
+                    email: session.user.email || '',
+                    full_name: metadata.full_name || session.user.email?.split('@')[0] || 'Student',
+                    student_id: metadata.student_id || null,
+                    username: metadata.username || null,
+                    program_code: metadata.program || null,
+                    year_level: metadata.year_level || null,
+                    role: 'student'
+                }, { onConflict: 'id' }).select('*').single();
+                if (profileInsert.error) throw profileInsert.error;
+                profile = profileInsert.data;
+                await supabaseClient.from('student_profile_data').upsert({
+                    profile_id: session.user.id,
+                    phone: metadata.contact || null,
+                    avatar_url: metadata.avatar_url || null
+                }, { onConflict: 'profile_id' });
+            }
+            const pendingAdminCode = session.user.user_metadata?.admin_signup_code;
+            if (pendingAdminCode && profile.role === 'student') {
+                const claim = await supabaseClient.rpc('claim_admin_signup_code', { p_code: pendingAdminCode, p_user_id: session.user.id });
+                if (!claim.error && claim.data) {
+                    await supabaseClient.auth.updateUser({ data: { ...session.user.user_metadata, admin_signup_code: null } });
+                    profile = await supabaseQuery(supabaseClient.from('profiles').select('*').eq('id', session.user.id).single(), 'Reloading administrator profile');
+                }
+            }
+            currentSession = { role: profile.role, userId: profile.student_id || profile.id, authUserId: profile.id, name: profile.full_name || session.user.email, isDemo: !!profile.is_demo };
+            suppressBackendStartupErrors = true;
+            try {
+                await loadBackendState();
+            } catch (error) {
+                console.error('[Supabase] Portal data could not be loaded during session restore', error);
+                courses = JSON.parse(JSON.stringify(DEFAULT_COURSES));
+                programs = JSON.parse(JSON.stringify(DEFAULT_PROGRAMS));
+                enrollmentSettings = { ...DEFAULT_SETTINGS };
+                enrollments = [];
+                specialRequests = [];
+                auditLogs = [];
+                students = [{
+                    id: profile.id,
+                    userId: profile.id,
+                    studentId: profile.student_id || profile.id,
+                    fullName: profile.full_name || session.user.email || 'Student',
+                    email: profile.email || session.user.email || '',
+                    contact: profile.contact || '',
+                    programCode: profile.program_code || '',
+                    yearLevel: profile.year_level || '',
+                    enrollmentStatus: profile.enrollment_status || 'Not Enrolled',
+                    isDemo: !!profile.is_demo
+                }];
+                admins = [];
+                notifications = [];
+                profileData = {};
+                medicalCleared = false;
+            } finally {
+                suppressBackendStartupErrors = false;
+            }
+            setupRealtimeSubscriptions();
+            if (profile.role === 'admin' || profile.role === 'super_admin') {
+                byId('login-view').style.display = 'none';
+                byId('signup-view').style.display = 'none';
+                byId('app-view').style.display = 'none';
+                byId('admin-view').style.display = 'flex';
+                byId('admin-sidebar-user').innerText = profile.full_name || session.user.email;
+                setDemoBadge(!!profile.is_demo);
+                navigateAdmin('admin-dashboard');
+            } else {
+                const student = students.find(item => item.userId === profile.id || item.studentId === profile.student_id);
+                enterStudentPortal(student || { studentId: profile.student_id || profile.id, fullName: profile.full_name || session.user.email, email: session.user.email });
+            }
+            restoredBackendSessionId = session.user.id;
+            if (profile.role === 'admin' || profile.role === 'super_admin') {
+                showToast(`Welcome, ${escapeHtml(profile.full_name || session.user.email)}!`, 'success');
+            }
+            })();
+            try {
+                await backendRestorePromise;
+            } finally {
+                backendRestorePromise = null;
+            }
+        }
+        function setDemoBadge(isDemo) {
+            document.querySelectorAll('.demo-account-badge').forEach(el => el.remove());
+            document.getElementById('demo-preview-notice')?.remove();
+            if (!isDemo) return;
+            const target = byId('admin-sidebar-user') || byId('dash-fname');
+            if (!target?.parentElement) return;
+            const badge = document.createElement('span');
+            badge.className = 'demo-account-badge';
+            badge.textContent = 'Demo account';
+            badge.style.cssText = 'display:inline-flex;margin-left:8px;padding:3px 7px;border-radius:999px;background:#FEF3C7;color:#92400E;font-size:10px;font-weight:600;';
+            target.parentElement.appendChild(badge);
+            const notice = document.createElement('div');
+            notice.id = 'demo-preview-notice';
+            notice.className = 'demo-preview-notice';
+            notice.textContent = 'Demo preview · changes are for demonstration only';
+            document.body.appendChild(notice);
+        }
+        function setLiveStatus(text, tone = '#059669') {
+            let el = byId('supabase-live-status');
+            if (!el) {
+                el = document.createElement('span');
+                el.id = 'supabase-live-status';
+                el.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:180;font-size:11px;padding:5px 9px;border-radius:999px;background:#fff;border:1px solid #E2E8F0;box-shadow:0 3px 12px rgba(15,23,42,.08);';
+                document.body.appendChild(el);
+            }
+            el.style.color = tone;
+            el.textContent = text;
+        }
+        async function refreshFromRealtime() {
+            try {
+                setLiveStatus('Reconnecting...', '#D97706');
+                await loadBackendState();
+                if (currentSession.role === 'student') updateAllViews();
+                else if (currentSession.role === 'admin' || currentSession.role === 'super_admin') renderAllAdminViews();
+                setLiveStatus('Live', '#059669');
+            } catch (error) {
+                setLiveStatus('Reconnecting...', '#D97706');
+            }
+        }
+        function setupRealtimeSubscriptions() {
+            if (!BACKEND_MODE || !supabaseClient || realtimeChannels.length) return;
+            const tables = ['profiles', 'courses', 'programs', 'enrollments', 'special_requests', 'notifications', 'student_profile_data', 'enrollment_settings', 'audit_logs'];
+            tables.forEach(table => {
+                const ownedFilter = currentSession.role === 'student' && currentSession.authUserId
+                    ? ({ profiles: `id=eq.${currentSession.authUserId}`, enrollments: `student_id=eq.${currentSession.authUserId}`, special_requests: `student_id=eq.${currentSession.authUserId}`, notifications: `profile_id=eq.${currentSession.authUserId}`, student_profile_data: `profile_id=eq.${currentSession.authUserId}` }[table])
+                    : undefined;
+                const change = { event: '*', schema: 'public', table };
+                if (ownedFilter) change.filter = ownedFilter;
+                const channel = supabaseClient.channel(`enrolla-${table}-${currentSession.authUserId || currentSession.userId}`)
+                    .on('postgres_changes', change, () => refreshFromRealtime())
+                    .subscribe(status => {
+                        if (status === 'SUBSCRIBED') setLiveStatus('Live', '#059669');
+                        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') setLiveStatus('Reconnecting...', '#D97706');
+                    });
+                realtimeChannels.push(channel);
+            });
+        }
+        async function cleanupRealtimeSubscriptions() {
+            if (!supabaseClient) return;
+            await Promise.all(realtimeChannels.map(channel => supabaseClient.removeChannel(channel)));
+            realtimeChannels = [];
+            byId('supabase-live-status')?.remove();
+        }
+        async function signInDemoAccount(kind) {
+            if (!ENABLE_DEMO_ACCOUNTS) return;
+            const email = kind === 'admin' ? 'admin.demo@enrolla.test' : 'student.demo@enrolla.test';
+            if (!BACKEND_MODE) {
+                byId('login-id').value = kind === 'admin' ? email : '12345678';
+                byId('login-pass').value = 'Demo@12345';
+                await handleLoginSubmit();
+                return;
+            }
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: 'Demo@12345' });
+            if (error || !data?.session) {
+                console.error('[Supabase] Demo account sign-in failed', error);
+                showToast(error?.message || 'Demo account is not available. Run supabase/seed.sql first.', 'error');
+                return;
+            }
+            try {
+                await restoreBackendSession(data.session);
+            } catch (restoreError) {
+                backendError('Loading demo account', restoreError);
+            }
+        }
+        window.signInDemoAccount = signInDemoAccount;
         function enterStudentPortal(stu) {
             currentSession = { role: 'student', userId: stu.studentId, name: stu.fullName };
             activateStudent(stu.studentId);
@@ -2791,19 +3536,37 @@
             byId('admin-view').style.display = 'none';
             byId('app-view').style.display = 'flex';
             applyProfileToDOM();
+            setDemoBadge(!!stu.isDemo);
             updateAllViews();
             navigateTo('dashboard');
             showToast(`Welcome back, ${profileData.fname}!`, 'success');
         }
-        function handleLoginSubmit(e) {
+        async function handleLoginSubmit(e) {
             if (e && typeof e.preventDefault === 'function') e.preventDefault();
-            if (!courses || courses.length === 0) loadState();
             const identifier = (byId('login-id').value || '').trim();
             const rawPass = byId('login-pass').value || '';
             if (!identifier || !rawPass) {
                 showToast('Please enter your username or ID number and password.', 'warning');
                 return false;
             }
+            if (BACKEND_MODE) {
+                let email = identifier;
+                if (!identifier.includes('@')) {
+                    const { data, error } = await supabaseClient.rpc('email_for_login', { identifier: identifier });
+                    if (error || !data) { showToast('Incorrect email, student ID, or password.', 'error'); return false; }
+                    email = data;
+                }
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: rawPass });
+                if (error || !data.user) {
+                    byId('login-pass').value = '';
+                    showToast(error?.message || 'Incorrect email or password.', 'error');
+                    return false;
+                }
+                await restoreBackendSession(data.session);
+                byId('login-pass').value = '';
+                return false;
+            }
+            if (!courses || courses.length === 0) loadState();
             const passHash = hashPassword(rawPass);
             const fail = () => {
                 byId('login-pass').value = '';
@@ -2826,12 +3589,81 @@
             return false;
         }
         window.handleLoginSubmit = handleLoginSubmit;
-        function handlePasswordReset() {
+        async function handlePasswordReset() {
             const val = byId('reset-input').value.trim();
             if (!val) { showToast('Please enter your Student ID or Email.', 'warning'); return; }
+            if (BACKEND_MODE) {
+                const email = val.includes('@') ? val : (await supabaseClient.rpc('email_for_login', { identifier: val })).data;
+                if (!email) { showToast('No account was found for that ID or email.', 'error'); return; }
+                const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo: window.location.href.split('#')[0] });
+                if (error) { backendError('Sending password reset email', error); return; }
+            }
             closeModal('forgot-modal');
             showToast(`Password reset instructions sent to ${val}`, 'success');
         }
+        const QUICK_ACTION_OPTIONS = [
+            { id: 'subjects', label: 'Browse Subjects', description: 'Go directly to the subject catalog', icon: 'menu_book', target: 'subjects' },
+            { id: 'schedule', label: 'View Other Schedules', description: 'Compare available class schedules', icon: 'calendar_month', target: 'schedule' }
+        ];
+        function getQuickActionsKey() {
+            return `enrolla_quick_actions_${currentSession.userId || 'guest'}`;
+        }
+        function getQuickActions() {
+            try {
+                const stored = JSON.parse(safeGetItem(getQuickActionsKey()) || '[]');
+                return Array.isArray(stored) ? stored.filter(id => QUICK_ACTION_OPTIONS.some(option => option.id === id)) : [];
+            } catch (error) {
+                return [];
+            }
+        }
+        function renderQuickActions() {
+            const list = byId('quick-actions-list');
+            const picker = byId('quick-actions-picker');
+            if (!list || !picker) return;
+            const selected = getQuickActions();
+            const options = QUICK_ACTION_OPTIONS.filter(option => !selected.includes(option.id));
+            list.innerHTML = selected.length ? selected.map(id => {
+                const option = QUICK_ACTION_OPTIONS.find(item => item.id === id);
+                return `<button class="quick-action-chip" type="button" onclick="runQuickAction('${option.id}')"><span class="material-symbols-outlined">${option.icon}</span>${option.label}</button>`;
+            }).join('') : '<span class="quick-actions-empty">No quick actions added yet.</span>';
+            picker.innerHTML = `<div class="quick-actions-picker-title">Choose a shortcut</div>${options.length ? options.map(option => `
+                <button class="quick-actions-option" type="button" role="menuitem" onclick="addQuickAction('${option.id}')">
+                    <span class="material-symbols-outlined">${option.icon}</span>
+                    <span><strong>${option.label}</strong><small>${option.description}</small></span>
+                </button>`).join('') : '<div class="quick-actions-picker-title">All quick actions are already added.</div>'}`;
+        }
+        function toggleQuickActionPicker(event) {
+            event?.stopPropagation();
+            const picker = byId('quick-actions-picker');
+            const button = document.querySelector('.quick-action-add');
+            if (!picker || !button) return;
+            const isOpen = picker.classList.toggle('open');
+            button.setAttribute('aria-expanded', String(isOpen));
+            if (isOpen) renderQuickActions();
+        }
+        function addQuickAction(actionId) {
+            const option = QUICK_ACTION_OPTIONS.find(item => item.id === actionId);
+            if (!option) return;
+            const selected = getQuickActions();
+            if (!selected.includes(actionId)) {
+                selected.push(actionId);
+                safeSetItem(getQuickActionsKey(), JSON.stringify(selected));
+            }
+            renderQuickActions();
+            byId('quick-actions-picker')?.classList.remove('open');
+            document.querySelector('.quick-action-add')?.setAttribute('aria-expanded', 'false');
+            showToast(`${option.label} added to Quick Actions.`, 'success');
+        }
+        function runQuickAction(actionId) {
+            const option = QUICK_ACTION_OPTIONS.find(item => item.id === actionId);
+            if (!option) return;
+            byId('quick-actions-picker')?.classList.remove('open');
+            document.querySelector('.quick-action-add')?.setAttribute('aria-expanded', 'false');
+            navigateTo(option.target);
+        }
+        window.toggleQuickActionPicker = toggleQuickActionPicker;
+        window.addQuickAction = addQuickAction;
+        window.runQuickAction = runQuickAction;
         function navigateTo(targetId) {
             document.querySelectorAll('.nav-menu li').forEach(item => {
                 if (item.getAttribute('data-target') === targetId) item.classList.add('active'); else item.classList.remove('active');
@@ -2888,7 +3720,7 @@
                 if (effectiveStatus === 'Open') {
                     bannerEl.className = 'alert-banner alert-success';
                     bannerIcon.innerText = 'verified_user';
-                    bannerText.innerHTML = `<strong>Enrollment is Open (${enrollmentSettings.academicYear} • ${enrollmentSettings.semester}):</strong> You may enroll in or drop subjects within capacity limits.`;
+                    bannerText.innerHTML = `<strong>Enrollment is Open (${enrollmentSettings.academicYear} • ${enrollmentSettings.semester}):</strong> You may enroll in subjects within capacity limits. Subject drops require Registrar approval.`;
                     bannerBadge.className = 'badge badge-enrolled';
                     bannerBadge.innerText = 'Open';
                 } else if (effectiveStatus === 'Scheduled') {
@@ -2968,8 +3800,8 @@
                     <span class="badge ${badgeClass}">${course.programCode ||
                     'BSIT'} • ${course.type}</span> </div> <p>
                     <span class="material-symbols-outlined" style="font-size:15px;">schedule</span> ${course.details} • <strong>${course.room}</strong> </p> </div>
-                    <button class="btn-action btn-drop" onclick="toggleCourse('${course.id}')" ${!isEnrollmentOpen ? 'style="opacity:0.5;"' :
-                    ''}> Drop Unit </button> </div>`;
+                    <button class="btn-action btn-drop" onclick="startDropRequest('${course.id}')" ${!isEnrollmentOpen ? 'style="opacity:0.5;"' :
+                    ''}> Request Drop </button> </div>`;
             });
             const fillPercentage = Math.min(100, (currentUnits / maxUnits) * 100);
             byId('unit-progress').style.width = `${fillPercentage}%`;
@@ -2979,6 +3811,7 @@
             byId('dash-total-units').innerText = currentUnits;
             byId('dash-subjects-count').innerText = `${enrolledCourses.length} subjects currently enrolled (${totalWeeklyHours} hrs/wk)`;
             byId('dash-load-status').innerText = currentUnits >= 15 ? 'Full Regular Load' : (currentUnits > 0 ? 'Partial Load' : 'No Load');
+            renderQuickActions();
             const dashDotList = byId('dash-dot-list');
             const dashSubList = byId('dash-subject-list');
             dashDotList.innerHTML = '';
@@ -3018,7 +3851,7 @@
             const sid = currentSession.userId;
             const grants = getStudentGrants(sid);
             const effectiveStatus = getEffectiveEnrollmentStatus();
-            if (effectiveStatus !== 'Open' && !grants.late) {
+            if (course.status === 'available' && effectiveStatus !== 'Open' && !grants.late) {
                 showToast(`Enrollment is currently ${effectiveStatus}. You cannot modify subjects outside the enrollment period. You may file a Special Request (Late Enrollment).`,
                     'error');
                 return;
@@ -3065,14 +3898,8 @@
                     `Student ${sid} enrolled in ${course.code}${effectiveStatus !== 'Open' ? ' (late enrollment approved by special request)' :
                     ''}.`);
             } else {
-                course.status = 'available';
-                course.enrolledCount = Math.max(0, course.enrolledCount - 1);
-                const existingEnr = enrollments.find(e => e.studentId === sid && e.subjectCode.toUpperCase() === course.code.toUpperCase() &&
-                    e.status === 'Approved');
-                if (existingEnr) { existingEnr.status = 'Cancelled'; }
-                showToast(`Dropped ${course.title}`, 'info');
-                addNotification('remove_circle_outline', `Dropped ${course.title} from study load`, 'enrollment');
-                logAdminAction('Enrollment', 'STUDENT_SELF_DROP', `Student ${sid} dropped ${course.code}.`);
+                startDropRequest(course.id);
+                return;
             }
             updateAllViews();
         };
@@ -3107,6 +3934,55 @@
             });
             renderCatalog();
         }
+        function schedulesOverlap(first, second) {
+            if (!first || !second || first.id === second.id) return false;
+            if (!first.days?.some(day => second.days?.includes(day))) return false;
+            const firstEnd = first.startHour + first.duration;
+            const secondEnd = second.startHour + second.duration;
+            return first.startHour < secondEnd && firstEnd > second.startHour;
+        }
+        function getConflictingSchedules(course) {
+            const enrolled = courses.filter(item => item.status === 'enrolled' && item.id !== course.id);
+            const available = courses.filter(item => item.status !== 'enrolled' && item.id !== course.id);
+            const pool = course.status === 'enrolled' ? available : enrolled;
+            return pool.filter(item => schedulesOverlap(course, item));
+        }
+        function getCourseBuilding(course) {
+            if (course.building) return course.building;
+            const room = (course.room || '').toLowerCase();
+            if (room.includes('gym')) return 'University Sports Complex';
+            if (room.includes('lab') || room.includes('cisco') || room.includes('design')) return 'College of Computing Building';
+            return 'Main Academic Building';
+        }
+        function renderConflictScheduleList(courseId, query = '') {
+            const course = courses.find(item => item.id === courseId);
+            const list = byId(`conflict-list-${courseId}`);
+            if (!course || !list) return;
+            const normalizedQuery = query.trim().toLowerCase();
+            const matches = getConflictingSchedules(course).filter(item => {
+                const haystack = `${item.code} ${item.name} ${item.scheduleText} ${getCourseBuilding(item)} ${item.room}`.toLowerCase();
+                return !normalizedQuery || haystack.includes(normalizedQuery);
+            });
+            list.innerHTML = matches.length ? matches.map(item => `<div class="conflict-schedule-row">
+                <span class="material-symbols-outlined" style="font-size:15px; color:#94A3B8;">event_busy</span>
+                <div class="conflict-detail"><span class="conflict-label">Class</span><strong>${escapeHtml(item.code)} - ${escapeHtml(item.name)}</strong></div>
+                <div class="conflict-detail"><span class="conflict-label">Schedule</span><span>${escapeHtml(item.scheduleText)}</span></div>
+                <div class="conflict-detail"><span class="conflict-label">Building / Room</span><span>${escapeHtml(getCourseBuilding(item))} • ${escapeHtml(item.room)}</span></div>
+            </div>`).join('') : '<div class="conflict-empty">No conflicting class schedules found.</div>';
+        }
+        function toggleConflictSchedules(courseId, button) {
+            const panel = byId(`conflicts-${courseId}`);
+            if (!panel) return;
+            const isOpen = panel.classList.toggle('open');
+            button.setAttribute('aria-expanded', String(isOpen));
+            button.innerText = isOpen ? '−' : '+';
+            if (isOpen) {
+                const search = panel.querySelector('.conflict-schedules-search');
+                renderConflictScheduleList(courseId, search?.value || '');
+                search?.focus();
+            }
+        }
+        window.toggleConflictSchedules = toggleConflictSchedules;
         function renderCatalog() {
             const catalog = byId('catalog-list');
             const query = (byId('catalog-search')?.value || '').toLowerCase().trim();
@@ -3125,19 +4001,27 @@
                 const isEnrolled = c.status === 'enrolled';
                 const isFull = c.enrolledCount >= c.maxCapacity;
                 const badgeClass = getTypeBadgeClass(c.type);
-                catalog.innerHTML += ` <div class="catalog-card"> <div> <div class="cat-header"> <div class="cat-title"> <h3>${c.title}</h3> </div> <span class="cat-units">${c.units} Units</span>
-                    </div> <div class="cat-meta-badges"> <span class="badge ${badgeClass}">${c.programCode ||
-                    'BSIT'} • ${c.type}</span> <span class="badge ${isEnrolled ? 'badge-enrolled' : (isFull ? 'badge-core' :
-                    'badge-available')}"> ${isEnrolled ? 'Enrolled' : (isFull ? 'Full (' + c.enrolledCount + '/' + c.maxCapacity + ')' :
-                    'Available (' + c.enrolledCount + '/' + c.maxCapacity +
-                    ')')} </span> </div> <div class="cat-desc">${c.desc}</div> <div class="cat-schedule-box">
-                    <span class="material-symbols-outlined" style="font-size:16px; color:#6366F1;">schedule</span> <span>${c.scheduleText} • <strong>${c.room}</strong></span> </div> </div>
-                    <div class="cat-footer"> <span style="font-size: 0.684rem; color: var(--text-muted); font-weight:500;">
-                    <span class="material-symbols-outlined" style="font-size:15px; vertical-align:middle;">person</span> ${c.instructor} </span> <div style="display:flex; gap:6px;">
-                    <button class="btn-action" style="background:#F1F5F9; color:#334155; padding: 6px 12px; font-size:0.667rem;" onclick="openCourseModal('${c.id}')">Syllabus</button>
-                    <button class="btn-action ${isEnrolled ? 'btn-drop' :
-                    'btn-enroll'}" onclick="toggleCourse('${c.id}')" style="padding: 6px 14px; font-size:0.667rem;"> ${isEnrolled ? 'Drop' : (isFull ?
-                    'Full' : 'Enroll')} </button> </div> </div> </div> `;
+                catalog.innerHTML += ` <div class="catalog-card" onclick="openCourseModal('${c.id}')">
+                    <div class="cat-subject">
+                        <div class="cat-header"><div class="cat-title"><h3>${c.title}</h3></div></div>
+                        <div class="cat-meta-badges"><span class="badge ${badgeClass}">${c.programCode || 'BSIT'} • ${c.type}</span>
+                        <span class="badge ${isEnrolled ? 'badge-enrolled' : (isFull ? 'badge-core' : 'badge-available')}">${isEnrolled ? 'Enrolled' :
+                    (isFull ? 'Full (' + c.enrolledCount + '/' + c.maxCapacity + ')' : 'Available (' + c.enrolledCount + '/' + c.maxCapacity + ')')}</span></div>
+                    </div>
+                    <span class="cat-units">${c.units} Units</span>
+                    <div class="cat-schedule-box"><span class="material-symbols-outlined" style="font-size:16px; color:#6366F1;">schedule</span>
+                    <span>${c.scheduleText} • <strong>${c.room}</strong></span>
+                    <button class="schedule-more-btn" aria-label="Show conflicting schedules" aria-expanded="false" onclick="event.stopPropagation(); toggleConflictSchedules('${c.id}', this)">+</button></div>
+                    <div id="conflicts-${c.id}" class="conflict-schedules" onclick="event.stopPropagation()">
+                    <div class="conflict-schedules-head"><span class="material-symbols-outlined" style="font-size:17px;">calendar_view_week</span><span class="conflict-schedules-title">Other class schedules</span></div>
+                    <input class="conflict-schedules-search" type="search" aria-label="Search other class schedules" placeholder="Search class, schedule, building, or room..." oninput="renderConflictScheduleList('${c.id}', this.value)">
+                    <div id="conflict-list-${c.id}" class="conflict-schedule-list"></div></div>
+                    <div class="cat-footer"><span style="font-size:0.66rem; color:var(--text-muted); font-weight:500;">
+                    <span class="material-symbols-outlined" style="font-size:15px; vertical-align:middle;">person</span> ${c.instructor}</span>
+                    <div style="display:flex; gap:6px;">
+                    <button class="cat-action btn-action" style="background:#F1F5F9; color:#334155; padding:6px 10px; font-size:0.64rem;" onclick="event.stopPropagation(); openCourseModal('${c.id}')">Details</button>
+                    <button class="cat-action btn-action ${isEnrolled ? 'btn-drop' : 'btn-enroll'}" onclick="event.stopPropagation(); ${isEnrolled ? `startDropRequest('${c.id}')` : `toggleCourse('${c.id}')`}" style="padding:6px 10px; font-size:0.64rem;">${isEnrolled ? 'Request Drop' : (isFull ? 'Full' : 'Enroll')}</button>
+                    </div></div></div> `;
             });
         }
 
@@ -3222,8 +4106,8 @@
             const fullName = `${profileData.lname.toUpperCase()}, ${profileData.fname.toUpperCase()} ${profileData.mname.toUpperCase()}`;
             const rowsHtml = enrolled.map(c => ` <tr> <td><strong>${c.title.split('-')[0].trim()}</strong></td> <td>${c.title.split('-')[1].trim()}</td> <td>${c.type}</td>
                 <td style="text-align:center;"><strong>${c.units}</strong></td> <td>${c.scheduleText}</td> <td>${c.room}</td> <td>${c.instructor}</td> </tr> `).join('');
-            byId('cor-modal-body').innerHTML = ` <div style="border:2px solid #1E293B; padding:1.5rem; border-radius:14px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #1E293B; padding-bottom:1rem; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            byId('cor-modal-body').innerHTML = ` <div style="border:2px solid #94A3B8; padding:1.5rem; border-radius:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #CBD5E1; padding-bottom:1rem; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
                 <div> <h2 style="color:#1E1B4B; font-size:1.154rem; margin:0;">ENROLLA UNIVERSITY SYSTEM</h2> <p style="font-size:0.701rem; color:var(--text-muted); margin:0;">${profileData.campus} • Office of the University Registrar</p>
                 </div> <div style="text-align:right;"> <span class="badge badge-enrolled" style="font-size:0.727rem;">OFFICIAL STUDY LOAD (COR)</span>
                 <p style="font-size:0.667rem; color:var(--text-muted); margin-top:4px;">1st Semester, AY 2026-2027</p> </div> </div>
@@ -3362,10 +4246,16 @@
         }
         function openModal(id) { byId(id).classList.add('open'); }
         function closeModal(id) { byId(id).classList.remove('open'); }
-        function logout(e) {
+        async function logout(e) {
             if (e) e.stopPropagation();
             saveState();
+            if (BACKEND_MODE && supabaseClient) {
+                await cleanupRealtimeSubscriptions();
+                await supabaseClient.auth.signOut();
+            }
             currentSession = { role: null, userId: null, name: null };
+            restoredBackendSessionId = null;
+            backendRestorePromise = null;
             profileData = {};
             notifications = [];
             medicalCleared = false;
@@ -3383,7 +4273,7 @@
 
         // ADMIN DASHBOARD CONTROLLER & ALL 7 ADMIN MODULES
         function requireAdmin() {
-            if (currentSession.role !== 'admin') {
+            if (currentSession.role !== 'admin' && currentSession.role !== 'super_admin') {
                 showToast('Unauthorized access: Administrator privileges required.', 'error');
                 return false;
             }
@@ -3892,22 +4782,22 @@
                     const sub = courses.find(c => c.code === sc);
                     return `<span class="badge badge-available" style="margin:2px;" title="${sub ? sub.name : sc}">${sc}</span>`;
                 }).join('');
-                return ` <div class="capacity-card available" style="border-left-color:var(--navy-700);"> <div>
+                return ` <div class="admin-program-card"> <div>
                     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;"> <div>
-                    <span class="badge" style="background:var(--navy-900); color:white; font-size:0.701rem; margin-bottom:4px;">${p.code}</span>
-                    <h3 style="font-size:0.898rem; color:var(--navy-900);">${p.name}</h3> </div> <span class="status-pill pill-open">${p.subjectCodes.length} Subjects</span> </div>
-                    <p style="font-size:0.71rem; color:var(--gray-600); margin-bottom:12px;">${p.description}</p>
-                    <div style="background:var(--gray-50); padding:10px 12px; border-radius:10px; border:1px solid var(--gray-200); margin-bottom:12px;">
-                    <div style="font-size:0.641rem; font-weight:700; color:var(--gray-600); text-transform:uppercase; margin-bottom:6px;"> Assigned Curriculum Subjects (${p.subjectCodes.length}): </div>
+                  <span class="badge program-code" style="font-size:0.701rem; margin-bottom:4px;">${p.code}</span>
+                  <h3 class="program-title" style="font-size:0.898rem;">${p.name}</h3> </div> <span class="status-pill pill-open">${p.subjectCodes.length} Subjects</span> </div>
+                  <p class="program-description" style="font-size:0.71rem; margin-bottom:12px;">${p.description}</p>
+                  <div class="program-curriculum" style="padding:10px 12px; border-radius:10px; margin-bottom:12px;">
+                  <div class="program-curriculum-label" style="font-size:0.641rem; font-weight:700; text-transform:uppercase; margin-bottom:6px;"> Assigned Curriculum Subjects (${p.subjectCodes.length}): </div>
                     <div style="display:flex; flex-wrap:wrap; gap:4px;"> ${assignedBadges ||
                     '<span style="font-size:0.684rem; color:var(--text-muted);">No subjects assigned yet.</span>'} </div> </div> </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--gray-200); padding-top:12px; flex-wrap:wrap; gap:8px;">
-                    <span style="font-size:0.667rem; color:var(--gray-600);"> <strong>${activeStuCount}</strong> Students • <strong>${activeEnrCount}</strong> Active Enrollments </span>
-                    <div style="display:flex; gap:6px;"> <button class="admin-btn admin-btn-sm admin-btn-navy" onclick="openProgramSubjectsModal('${p.code}')">
+                  <div class="program-footer" style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #F1F5F9; padding-top:12px; flex-wrap:wrap; gap:8px;">
+                  <span style="font-size:0.667rem; color:var(--text-muted);"> <strong>${activeStuCount}</strong> Students • <strong>${activeEnrCount}</strong> Active Enrollments </span>
+                    <div style="display:flex; gap:6px;"> <button class="admin-btn admin-btn-sm program-action-assign" onclick="openProgramSubjectsModal('${p.code}')">
                     <span class="material-symbols-outlined" style="font-size:15px;">Rule</span> Assign Subjects </button>
-                    <button class="admin-btn admin-btn-sm admin-btn-outline" onclick="openProgramFormModal('${p.code}')">
+                    <button class="admin-btn admin-btn-sm program-action-edit" onclick="openProgramFormModal('${p.code}')">
                     <span class="material-symbols-outlined" style="font-size:15px;">edit</span> </button>
-                    <button class="admin-btn admin-btn-sm admin-btn-danger" onclick="attemptDeleteProgram('${p.code}')">
+                    <button class="admin-btn admin-btn-sm program-action-delete" onclick="attemptDeleteProgram('${p.code}')">
                     <span class="material-symbols-outlined" style="font-size:15px;">delete</span> </button> </div> </div> </div> `;
             }).join('');
         }
@@ -4191,7 +5081,7 @@
                 const availableSlots = Math.max(0, c.maxCapacity - c.enrolledCount);
                 const pct = Math.min(100, Math.round(ratio * 100));
                 const cardStateClass = isOver ? 'over-capacity' : (isFull ? 'full' : (isNear ? 'near-full' : 'available'));
-                const barColor = isFull ? '#EF4444' : (isNear ? '#F59E0B' : '#10B981');
+                const barColor = isFull ? '#EF4444' : (isNear ? '#8B5CF6' : '#10B981');
                 return ` <div class="capacity-card ${cardStateClass}"> <div> <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;"> <div>
                     <span class="badge badge-available" style="margin-bottom:4px;">${c.programCode}</span> <h4 style="font-size:0.855rem; color:var(--navy-900);">${c.code} - ${c.name}</h4>
                     </div> <span class="status-pill ${isFull ? 'pill-full' : (isNear ? 'pill-near' : 'pill-available')}"> ${isOver ? 'Over Limit!' :
@@ -4336,7 +5226,12 @@
             const el = byId('existing-admins-list');
             if (!el) return;
             el.innerHTML = `<strong>Authorized Administrators (${admins.length}):</strong> ` +
-                admins.map(a => `<code>${a.username}</code> (${a.fullName} • Hash: <code>${a.passwordHash.substring(0, 14)}...</code>)`).join(', ');
+                admins.map(a => {
+                    const credentialNote = a.passwordHash
+                        ? `Hash: <code>${a.passwordHash.substring(0, 14)}...</code>`
+                        : 'Managed by Supabase Auth';
+                    return `<code>${escapeHtml(a.username || a.email || 'Administrator')}</code> (${escapeHtml(a.fullName || 'Administrator')} • ${credentialNote})`;
+                }).join(', ');
         }
         function handleCreateNewAdmin(e) {
             e.preventDefault();
@@ -4348,6 +5243,23 @@
                 showToast(`Admin username "${username}" already exists.`, 'error');
                 return;
             }
+            async function generateAdminAccessCode() {
+                if (BACKEND_MODE) {
+                    const { data, error } = await supabaseClient.rpc('generate_admin_signup_code');
+                    if (error) { backendError('Generating administrator access code', error); return; }
+                    const output = byId('generated-admin-code');
+                    output.textContent = data;
+                    output.style.display = 'inline-block';
+                    showToast('One-time administrator signup code generated.', 'success');
+                    return;
+                }
+                const output = byId('generated-admin-code');
+                localAdminSignupCode = `ENR-${crypto.randomUUID().replaceAll('-', '').slice(0, 10).toUpperCase()}`;
+                output.textContent = localAdminSignupCode;
+                output.style.display = 'inline-block';
+                showToast('Demo access code generated locally.', 'info');
+            }
+            window.generateAdminAccessCode = generateAdminAccessCode;
             admins.push({ username, fullName, passwordHash: hashPassword(pass), role: 'Administrator' });
             logAdminAction('Security', 'CREATE_ADMIN', `Created new administrator account "${username}" (${fullName}).`);
             saveState();
@@ -4361,6 +5273,11 @@
 
         // SPECIAL REQUESTS (student form + admin review)
         const REQUEST_TYPES = {
+            'Subject Drop Request': {
+                subject: true,
+                units: false,
+                hint: 'Dropping a subject requires Registrar approval. Your study load will stay unchanged until the request is approved.'
+            },
             'Late Enrollment': {
                 subject: false,
                 units: false,
@@ -4396,6 +5313,12 @@
             if (r.subjectCode) return `Subject: ${r.subjectCode}`;
             return 'General request';
         }
+        function getStudentEnrolledCourses(studentId = currentSession.userId) {
+            const approvedCodes = new Set(enrollments
+                .filter(e => e.studentId === studentId && e.status === 'Approved')
+                .map(e => e.subjectCode.toUpperCase()));
+            return courses.filter(c => approvedCodes.has(c.code.toUpperCase()));
+        }
         function onRequestTypeChange() {
             const type = byId('req-type').value;
             const cfg = REQUEST_TYPES[type];
@@ -4404,16 +5327,36 @@
             byId('req-units-wrap').style.display = cfg.units ? '' : 'none';
             if (cfg.subject) {
                 const sel = byId('req-subject');
-                sel.innerHTML = courses.filter(c => c.status === 'available').map(c => {
+                const subjectOptions = type === 'Subject Drop Request' ? getStudentEnrolledCourses() : courses.filter(c => c.status === 'available');
+                sel.innerHTML = subjectOptions.map(c => {
                     const tags = [];
-                    if (c.enrolledCount >= c.maxCapacity) tags.push('FULL');
-                    const cf = findScheduleConflict(c);
-                    if (cf) tags.push('conflicts with ' + cf.code);
+                    if (type !== 'Subject Drop Request') {
+                        if (c.enrolledCount >= c.maxCapacity) tags.push('FULL');
+                        const cf = findScheduleConflict(c);
+                        if (cf) tags.push('conflicts with ' + cf.code);
+                    } else {
+                        tags.push(`${c.units} units`);
+                    }
                     return `<option value="${escapeHtml(c.code)}">${escapeHtml(c.title)}${tags.length ? ' (' + tags.join(', ') + ')' : ''}</option>`;
                 }).join('');
+                if (!subjectOptions.length) {
+                    sel.innerHTML = '<option value="">No enrolled subjects available</option>';
+                }
             }
         }
         window.onRequestTypeChange = onRequestTypeChange;
+        function startDropRequest(courseId) {
+            if (currentSession.role !== 'student') return;
+            const course = courses.find(c => c.id === courseId);
+            if (!course || course.status !== 'enrolled') return;
+            navigateTo('requests');
+            byId('req-type').value = 'Subject Drop Request';
+            onRequestTypeChange();
+            byId('req-subject').value = course.code;
+            byId('req-reason').focus();
+            showToast(`Drop request started for ${course.code}. Add your reason and submit it for Registrar approval.`, 'info');
+        }
+        window.startDropRequest = startDropRequest;
         function renderStudentRequests() {
             const list = byId('my-requests-list');
             const typeSel = byId('req-type');
@@ -4464,6 +5407,10 @@
                 subjectCode = byId('req-subject').value;
                 const course = courses.find(c => c.code === subjectCode);
                 if (!course) { showToast('Please choose a subject.', 'warning'); return; }
+                if (type === 'Subject Drop Request' && !getStudentEnrolledCourses(sid).some(c => c.code === subjectCode)) {
+                    showToast('You can only request a drop for a subject currently in your study load.', 'warning');
+                    return;
+                }
                 if (type === 'Full Subject Override' && course.enrolledCount < course.maxCapacity) {
                     showToast(`${subjectCode} still has open slots. You can enroll in it directly.`, 'info');
                     return;
@@ -4495,7 +5442,7 @@
             };
             specialRequests.unshift(req);
             logAdminAction('Requests', 'SUBMIT_REQUEST', `Student ${sid} submitted ${req.id} (${type}${subjectCode ? ' - ' + subjectCode : ''}).`);
-            addNotification('contact_support', `Special request ${req.id} (${type}) was submitted.`, 'requests');
+            addNotification('contact_support', `${type} ${req.id} was submitted for Registrar approval.`, 'requests');
             byId('req-reason').value = '';
             saveState();
             renderStudentRequests();
@@ -4573,14 +5520,27 @@
                 showToast('Please add a remark explaining why the request is rejected.', 'warning');
                 return;
             }
-            r.status = approved ? 'Approved' : 'Rejected';
             r.adminRemark = remark;
             r.decidedBy = currentSession.userId;
             r.decidedAt = new Date().toISOString().replace('T', ' ').substring(0, 16);
+            if (approved && r.type === 'Subject Drop Request') {
+                const enrollment = enrollments.find(e => e.studentId === r.studentId &&
+                    e.subjectCode.toUpperCase() === r.subjectCode.toUpperCase() && e.status === 'Approved');
+                const course = courses.find(c => c.code.toUpperCase() === r.subjectCode.toUpperCase());
+                if (!enrollment || !course) {
+                    showToast(`Unable to approve ${r.id}: ${r.subjectCode} is no longer in the student's active study load.`, 'error');
+                    return;
+                }
+                enrollment.status = 'Cancelled';
+                course.enrolledCount = Math.max(0, course.enrolledCount - 1);
+                logAdminAction('Enrollment', 'APPROVE_SUBJECT_DROP',
+                    `Approved ${r.id}; removed ${r.subjectCode} from student ${r.studentId}'s study load.`);
+            }
             if (approved && r.type === 'Late Enrollment') {
                 const days = parseInt(byId('req-days').value, 10) || 7;
                 r.expiresAt = new Date(Date.now() + days * 86400000).toISOString();
             }
+            r.status = approved ? 'Approved' : 'Rejected';
             const nice = approved ? 'approved' : 'rejected';
             pushStudentNotification(r.studentId, approved ? 'check_circle' : 'cancel',
                 `Your special request ${r.id} (${r.type}) was ${nice}.${remark ? ' Remarks: ' + remark : ''}`, 'requests');
@@ -4597,11 +5557,53 @@
         window.addEventListener('click', function(e) {
             if (!e.target.closest('.notification-wrapper')) { const nd = byId('notif-dropdown'); if (nd) nd.style.display = 'none'; }
             if (!e.target.closest('.user-widget')) { const um = byId('user-menu-popup'); if (um) um.style.display = 'none'; }
+            if (!e.target.closest('.quick-actions-card')) {
+                const picker = byId('quick-actions-picker');
+                if (picker) picker.classList.remove('open');
+                document.querySelector('.quick-action-add')?.setAttribute('aria-expanded', 'false');
+            }
             if (e.target.classList.contains('modal-backdrop')) { e.target.classList.remove('open'); }
         });
 
         // Initialize state on load
-        loadState();
+        async function initializeApplication() {
+            if (ENABLE_DEMO_ACCOUNTS) byId('demo-account-actions').style.display = 'flex';
+            if (!BACKEND_MODE) {
+                showDemoModeBanner();
+                loadState();
+                setupCustomSignupSelects();
+                setupSignupValidation();
+                return;
+            }
+            try {
+                const { data } = await supabaseClient.auth.getSession();
+                if (data.session) await restoreBackendSession(data.session);
+                else {
+                    suppressBackendStartupErrors = true;
+                    try {
+                        await loadBackendState();
+                    } finally {
+                        suppressBackendStartupErrors = false;
+                    }
+                }
+            } catch (error) {
+                console.error('[Supabase] Startup session check failed', error);
+                currentSession = { role: null, userId: null, name: null };
+                showLogin();
+            }
+            supabaseClient.auth.onAuthStateChange((_event, session) => {
+                if (session && !currentSession.role) {
+                    restoreBackendSession(session).catch(error => {
+                        console.error('[Supabase] Session restoration failed', error);
+                        currentSession = { role: null, userId: null, name: null };
+                        showLogin();
+                    });
+                }
+            });
+            setupCustomSignupSelects();
+            setupSignupValidation();
+        }
+        initializeApplication();
     </script>
 </body>
 </html>
